@@ -1,6 +1,7 @@
 
 import { useState } from 'react'
 import { services } from './assets/services';
+import Panel from './components/Panel';
 import './App.css'
 
 const getFormattedPrice = (price) => `${price.toFixed(2)}€`;
@@ -12,7 +13,7 @@ export default function App() {
   const [checkedState, setCheckedState] = useState(
     new Array(services.length).fill(false)
   );
-
+  //Estado deonde se guarda el total
   const [ total, setTotal ] = useState(0);
 
   // Cuando cambie un checkbox actualizo su valor al contario del que tenia en un nuevo array
@@ -56,6 +57,9 @@ export default function App() {
                   name={task}
                   value={task}
                   checked={checkedState[index]}
+                  {if (checkedState[index] == true){
+                    
+                  }  }
                   onChange={() => handleOnChange(index)}
                 />
                 <label htmlFor={`custom-checkbox-${index}`}>{task}  {price}€</label>
