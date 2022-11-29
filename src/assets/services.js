@@ -10,8 +10,8 @@
     id:  2,
     task: 'Una consultoria SEO',
     price: 300,
-    pages: 0,
-    lang: 0
+    pages: 2,
+    lang: 2
     },
     {
     id:  3,

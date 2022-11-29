@@ -28,7 +28,9 @@ export default function App() {
     //Calculo el total cogiendo el index de aquellos valores que sean true, y con ese index voy al array de servicios y cojo su precio.
     const totalPrice = updatedCheckedState.reduce(
       (sum, currentState, index) => {
-        if (currentState === true) {
+        if (currentState === true && index === 0) {
+          return sum + (services[index].price) + ((services[index].pages) * (services[index].lang) * 30);
+        }else if(currentState === true && index !== 0){
           return sum + services[index].price;
         }
         return sum;
