@@ -57,16 +57,14 @@ export default function App() {
                   name={task}
                   value={task}
                   checked={checkedState[index]}
-                  {if (checkedState[index] == true){
-                    
-                  }  }
                   onChange={() => handleOnChange(index)}
-                />
+                  />
                 <label htmlFor={`custom-checkbox-${index}`}>{task}  {price}€</label>
               </div>
             </li>
           );
         })}
+        {checkedState[0] ? <Panel /> : null }
       </ul>
       <div className="total-section">Total: {getFormattedPrice(total)}</div>
     </div>
