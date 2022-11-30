@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
+import Panel from './components/Panel';
 //import { services } from './assets/services';
-//import Panel from './components/Panel';
 import './App.css'
 
 
@@ -10,7 +10,7 @@ const getFormattedPrice = (price) => `${price.toFixed(2)}€`;
 
 export default function App() {
   
-  //const [web, setWeb] = useState(0);
+  const [web, setWeb] = useState(0);
   //const [seo, setSeo] = useState(0);
   //const [ads, setAds] = useState(0);
   const [pages, setPages] = useState(1);
@@ -29,7 +29,7 @@ export default function App() {
   const handleOnChange = (service) => {
     if(service.checked) {
       suma += parseInt(service.value)
-      setTotal(suma)
+      setTotal(suma);
     }else{
       suma -= parseInt(service.value)
       setTotal(suma)
@@ -41,6 +41,7 @@ export default function App() {
     <div className="App">
       <h3>Que dessitjes que fem?</h3><br/><br/>
          <input
+            id='checkyweb'
             className='form-check-input'
             type="checkbox"
             value={500}
