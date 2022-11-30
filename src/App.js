@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { services } from './assets/services';
 import Panel from './components/Panel';
 import './App.css'
@@ -30,35 +30,50 @@ export default function App() {
     let suma, priceWeb, priceSeo , priceAds;
 
       if(service.checked && service.name === 'Web'){
+        console.log(web)
         setWeb(true);
-        priceWeb = Number(service.value)
+        console.log(web)
+        priceWeb = parseInt(service.value)
         console.log(service.name + " " + priceWeb)
+        console.log(`El tipo de datos de priceweb es :  ${typeof(priceWeb)} `)
       }
 
       if(service.checked && service.name === 'Seo'){
         setSeo(true);
-        priceSeo = Number(service.value)
+        priceSeo = parseInt(service.value)
         console.log(service.name + " " + priceSeo)
+        console.log(`El tipo de datos de priceseo es :  ${typeof(priceSeo)} `)
       }
 
       if(service.checked && service.name === 'Ads'){
         setAds(true);
-        priceAds = service.value;
+        priceAds = parseInt(service.value);
         console.log(service.name + " " + priceAds)
+        console.log(`El tipo de datos de priceads es :  ${typeof(priceAds)} `)
       }
 
-      suma = Number(parseInt(priceWeb + priceSeo + priceAds))
-      console.log(suma)
+      //suma = Number(parseInt(priceWeb + priceSeo + priceAds))
+      //suma = priceWeb
+      //console.log(suma)
+      //console.log(typeof(suma))
     
     const totalPrice = () => {    
       
-      return suma;
+      return priceWeb  ;
     }     
-      
+
+    setTotal(priceSeo + 85); 
+    
+    
     
     //Paso el precio total calculado a la funcion setTotal para que repinte y muestre el total actualizado en pantalla.
-    setTotal(totalPrice);  
+    
   };
+  useEffect(() => {
+    alert('estic dins del effect')
+  
+
+  }, [total])
 
   return (
     <div className="App">
