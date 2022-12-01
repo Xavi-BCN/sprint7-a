@@ -6,11 +6,12 @@ import './App.css'
 
 
 let suma = 0;
+let viewPanel = false;
 const getFormattedPrice = (price) => `${price.toFixed(2)}€`;
 
 export default function App() {
   
-  const [web, setWeb] = useState(0);
+  const [web, setWeb] = useState(false);
   //const [seo, setSeo] = useState(0);
   //const [ads, setAds] = useState(0);
   const [pages, setPages] = useState(1);
@@ -36,7 +37,7 @@ export default function App() {
     } 
   };
 
-
+  
   return (
     <div className="App">
       <h3>Que dessitjes que fem?</h3><br/><br/>
@@ -48,6 +49,7 @@ export default function App() {
             name='Web'
             onChange={ (e) => handleOnChange(e.target)}
             /><h5 style={{ display: "inline" }}> Una pàgina Web (500€)</h5><br/><br/>
+            <Panel paginas={handlePages} idiomas={handleLang}/><br/>
           <input
             className='form-check-input'
             type="checkbox"
