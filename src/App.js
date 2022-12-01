@@ -29,10 +29,11 @@ export default function App() {
   
 
   const handleOnChange = (service) => {
-    console.log(service)
+    
     if(service.checked) {
       
       if(service.name === 'Web'){
+        viewPanel = true
         suma += parseInt(service.value) + (pages * lang * 30)
         setWeb(parseInt(service.value) + (pages * lang * 30))
         console.log(pages, lang, suma)
@@ -53,6 +54,7 @@ export default function App() {
         setPages(1)
         setLang(1)
         setWeb(0)
+        viewPanel = false
       }else{
         if(service.name === 'Seo'){
           suma -= seo
@@ -87,7 +89,8 @@ export default function App() {
             name='Web'
             onChange={ (e) => handleOnChange(e.target)}
             /><h5 style={{ display: "inline" }}> Una pàgina Web (500€)</h5><br/><br/>
-            <Panel paginas={handlePages} idiomas={handleLang}/><br/>
+            {viewPanel && (<>
+            <Panel paginas={handlePages} idiomas={handleLang}/><br/></>)}
           <input
             className='form-check-input'
             type="checkbox"
