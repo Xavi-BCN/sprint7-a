@@ -5,16 +5,16 @@ import { services } from "../assets/services";
 
 
 function Panel ({paginas, idiomas, view}){
-  /* const PanelStyle = styled.div`
+  /*  const PanelStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-item: center;
+    align-items: center;
     border: 2px solid black;
     border-radius: 10px;
     padding: 30px 5px;
     width: 450px;
-  `; */
+  `;  */
     
   return (
     <>

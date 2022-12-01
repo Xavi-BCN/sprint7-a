@@ -1,25 +1,25 @@
 
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import Panel from './components/Panel';
 //import { services } from './assets/services';
 import './App.css'
 
 
 let suma = 0;
+let sumaweb = 0;
 let viewPanel = false;
-const getFormattedPrice = (price) => `${price.toFixed(2)}€`;
+//const getFormattedPrice = (price) => `${price.toFixed(2)}€`;
 
 export default function App() {
   
-  const [web, setWeb] = useState(false);
-  //const [seo, setSeo] = useState(0);
-  //const [ads, setAds] = useState(0);
+  const [web, setWeb] = useState(0);
+  const [seo, setSeo] = useState(0);
+  const [ads, setAds] = useState(0);
   const [pages, setPages] = useState(1);
   const [lang, setLang] = useState(1);
-  const [ total, setTotal ] = useState(0);
+  const [total, setTotal ] = useState(0);
 
-  
-  
+
   const handlePages = (numOfPages) =>{
     setPages(numOfPages);
   };
@@ -27,16 +27,54 @@ export default function App() {
     setLang(numOfLang);
   }
   
-  const handleOnChange = (service) => {
-    if(service.checked) {
-      suma += parseInt(service.value)
-      setTotal(suma);
-    }else{
-      suma -= parseInt(service.value)
-      setTotal(suma)
-    } 
-  };
 
+  const handleOnChange = (service) => {
+    console.log(service)
+    if(service.checked) {
+      
+      if(service.name === 'Web'){
+        suma += parseInt(service.value) + (pages * lang * 30)
+        setWeb(parseInt(service.value) + (pages * lang * 30))
+        console.log(pages, lang, suma)
+      }        
+      
+      if(service.name === 'Seo'){
+        suma += parseInt(service.value);
+        setSeo(parseInt(service.value))
+        
+      }
+      if(service.name === 'Ads'){
+        suma += parseInt(service.value);
+        setAds(parseInt(service.value))
+      }
+    }else{
+      if(service.name === 'Web'){
+        suma -= web
+        setPages(1)
+        setLang(1)
+        setWeb(0)
+      }else{
+        if(service.name === 'Seo'){
+          suma -= seo
+          setSeo(0)
+        }else{
+          suma -= ads
+          setAds(0)
+        }        
+      }        
+    }  
+  };
+  
+  console.log(pages)
+  console.log(lang)
+  
+  useEffect(() => {
+    setTotal(suma)
+
+  }, [web, seo, ads, pages, lang])
+  
+  
+  
   
   return (
     <div className="App">
