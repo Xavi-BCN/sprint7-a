@@ -1,14 +1,12 @@
 
 import { useState,useEffect } from 'react'
 import Panel from './components/Panel';
-//import { services } from './assets/services';
 import './App.css'
-
 
 let suma = 0;
 let sumaweb = 0;
+let pricePagesAndLang = 0
 let viewPanel = false;
-//const getFormattedPrice = (price) => `${price.toFixed(2)}€`;
 
 export default function App() {
   
@@ -19,7 +17,6 @@ export default function App() {
   const [lang, setLang] = useState(1);
   const [total, setTotal ] = useState(0);
 
-
   const handlePages = (numOfPages) =>{
     setPages(numOfPages);
   };
@@ -27,22 +24,20 @@ export default function App() {
     setLang(numOfLang);
   }
   
-
   const handleOnChange = (service) => {
     
     if(service.checked) {
       
       if(service.name === 'Web'){
         viewPanel = true
-        suma += parseInt(service.value) + (pages * lang * 30)
-        setWeb(parseInt(service.value) + (pages * lang * 30))
-        console.log(pages, lang, suma)
+        pricePagesAndLang = 30
+        suma += parseInt(service.value) 
+        setWeb(parseInt(service.value))
       }        
       
       if(service.name === 'Seo'){
         suma += parseInt(service.value);
         setSeo(parseInt(service.value))
-        
       }
       if(service.name === 'Ads'){
         suma += parseInt(service.value);
@@ -55,6 +50,7 @@ export default function App() {
         setLang(1)
         setWeb(0)
         viewPanel = false
+        pricePagesAndLang = 0
       }else{
         if(service.name === 'Seo'){
           suma -= seo
@@ -67,15 +63,12 @@ export default function App() {
     }  
   };
   
-  console.log(pages)
-  console.log(lang)
+  console.log(web, pages, lang , seo, ads)
   
   useEffect(() => {
-    setTotal(suma)
-
-  }, [web, seo, ads, pages, lang])
-  
-  
+    sumaweb = (pages * lang * pricePagesAndLang)
+    setTotal(suma + sumaweb)
+  }, [web, seo, ads, , pages, lang])
   
   
   return (
