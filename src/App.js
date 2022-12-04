@@ -1,7 +1,7 @@
 
 import { useState,useEffect } from 'react'
 import Panel from './components/Panel';
-import './App.css'
+import './Styles/App.css'
 
 let suma = 0;
 let sumaweb = 0;
@@ -63,12 +63,12 @@ export default function App() {
     }  
   };
   
-  console.log(web, pages, lang , seo, ads)
+  console.log(web, pages, lang, seo, ads)
   
   useEffect(() => {
     sumaweb = (pages * lang * pricePagesAndLang)
     setTotal(suma + sumaweb)
-  }, [web, seo, ads, , pages, lang])
+  }, [web, seo, ads, pages, lang])
   
   
   return (

@@ -1,14 +1,12 @@
 import PanelStyle from "styled-components";
 
 export const StylPanel = PanelStyle.div`
-  display: flex;
-  flex-wrap: wrap;
-  
+  height: 160px;
   border: 4px solid blue;
   border-radius: 10px;
   padding: 30px 5px;
-  width: 450px;
+  width: 400px;
 `;
 
-  //justify-content: center;
-  //align-items: center;
+
+  

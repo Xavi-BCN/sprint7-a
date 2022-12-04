@@ -1,5 +1,5 @@
 //import { useState } from "react";
-import { StylPanel } from "./PanelStyle";
+import { StylPanel } from "../Styles/PanelStyle";
 import Controls from "./controls";
 
 function Panel ({paginas, idiomas}){
