@@ -1,13 +1,17 @@
 import '../../src/Styles/Control.css'
 
 function Controls({ control, whatInput }) {
-
+  
+  //const regularExpression = {isANum: /^\d{1,3}$/}
+    
+  
   let target = document.getElementById(`${whatInput}`)
-
+  
   function increment() {
     target.value++;
     control(target.value)
   }
+
   function decrement() {
     if (target.value >= 2) {
       target.value--;

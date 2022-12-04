@@ -10,12 +10,13 @@ let viewPanel = false;
 
 export default function App() {
   
-  const [web, setWeb] = useState(0);
-  const [seo, setSeo] = useState(0);
-  const [ads, setAds] = useState(0);
+  const [web, setWeb] = useState(false);
+  const [seo, setSeo] = useState(false);
+  const [ads, setAds] = useState(false);
   const [pages, setPages] = useState(1);
   const [lang, setLang] = useState(1);
   const [total, setTotal ] = useState(0);
+  const [savedData, setSavedData ] = useState(false);
 
   const handlePages = (numOfPages) =>{
     setPages(numOfPages);
@@ -32,32 +33,32 @@ export default function App() {
         viewPanel = true
         pricePagesAndLang = 30
         suma += parseInt(service.value) 
-        setWeb(parseInt(service.value))
+        setWeb(true)
       }        
       
       if(service.name === 'Seo'){
         suma += parseInt(service.value);
-        setSeo(parseInt(service.value))
+        setSeo(true)
       }
       if(service.name === 'Ads'){
         suma += parseInt(service.value);
-        setAds(parseInt(service.value))
+        setAds(true)
       }
     }else{
       if(service.name === 'Web'){
         suma -= web
         setPages(1)
         setLang(1)
-        setWeb(0)
+        setWeb(true)
         viewPanel = false
         pricePagesAndLang = 0
       }else{
         if(service.name === 'Seo'){
           suma -= seo
-          setSeo(0)
+          setSeo(false)
         }else{
           suma -= ads
-          setAds(0)
+          setAds(false)
         }        
       }        
     }  
@@ -66,11 +67,32 @@ export default function App() {
   console.log(web, pages, lang, seo, ads)
   
   useEffect(() => {
+    
+    //getData();
     sumaweb = (pages * lang * pricePagesAndLang)
     setTotal(suma + sumaweb)
+
   }, [web, seo, ads, pages, lang])
+
+
+ /* const getData = () => {
+  setWeb(localStorage.getItem('web'));
+  setPages(localStorage.getItem('pages'));
+  setLang(localStorage.getItem('lang'));
+  setSeo(localStorage.getItem('seo'));
+  setAds(localStorage.getItem('ads'));
+ }  */
   
-  
+ const saveData = ()=>{
+  localStorage.setItem('web', web);
+  localStorage.setItem('pages', pages);
+  localStorage.setItem('lang', lang);
+  localStorage.setItem('seo', seo);
+  localStorage.setItem('ads', ads);
+  setSavedData(true);
+ }
+
+
   return (
     <div className="App">
       <h3>Que dessitjes que fem?</h3><br/><br/>
@@ -98,8 +120,11 @@ export default function App() {
             name='Ads'
             onChange={ (e) => handleOnChange(e.target)}
           /><h5 style={{ display: "inline" }}> Una campanya de Google Ads (200€)</h5><br/><br/>
-      
-      <div className="total-section">Total: {total}€</div>
+      <div className="total-section">Total: {total}€</div><br/><br/>
+      <button
+        type="button"
+        className="btn btn-primary ms-1 mt-2"
+        onClick={saveData}>Desar</button>
     </div>
   );
 }
