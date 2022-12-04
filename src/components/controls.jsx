@@ -1,16 +1,27 @@
 
 function Controls ({control, whatInput}){
 
-  function increment()   {
-    document.getElementById(`${whatInput}`).value++;
+  let target = document.getElementById(`${whatInput}`)
+  
+  function increment(){
+      target.value ++;
+      control(target.value)
   }
-  function decrement()   {
-    document.getElementById(`${whatInput}`).value--;
+  function decrement(){
+    if(target.value >= 2){
+      target.value --;
+      control(target.value)
+    }
+  }
+
+  function reset(){
+    target.value = 1;
+    control(target.value);
   }
     
   return (
     <>
-      <button onClick={increment}> + </button>
+      <button className="btn btn-outline-success" onClick={increment} > + </button>
       <input
         id= {`${whatInput}`}
         style={{width: '30%', margin: '10px'}}
@@ -20,10 +31,12 @@ function Controls ({control, whatInput}){
         type="number"
         aria-label=".form-control-sm example"
         onChange={ (event) => control(event.target.value)}
-        on
       />
-      <button onClick={decrement}> - </button>  
+      <button className="btn btn-outline-danger" onClick={decrement}> - </button>
+      <button className="btn btn-outline-warning" onClick={reset}> Reset</button>  
     </>
   );
 }
 export default Controls;
+
+// onBlur={control(document.getElementById(`${whatInput}`).value)}

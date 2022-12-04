@@ -8,12 +8,14 @@ function Panel ({paginas, idiomas}){
   return (
     <>
       <StylPanel>
-      <p style={{display: 'inline'}}>Número de pàgines:</p>
+      <p className="text-start ">Núm. pàgines: </p>
       <Controls control={paginas} whatInput={'inputpag'}/>
-      <p>Número d'idiomes:</p>
+      <p className="text-start" >Núm. d'idiomes:</p>
       <Controls control={idiomas} whatInput={'inputlang'}/>
       </StylPanel>
     </>
   );
 }
 export default Panel;
+
+//style={{display: 'inline'}}
