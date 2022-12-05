@@ -16,7 +16,7 @@ export default function App() {
   const [pages, setPages] = useState(1);
   const [lang, setLang] = useState(1);
   const [total, setTotal ] = useState(0);
-  const [savedData, setSavedData ] = useState(false);
+  
 
   const handlePages = (numOfPages) =>{
     setPages(numOfPages);
@@ -46,18 +46,18 @@ export default function App() {
       }
     }else{
       if(service.name === 'Web'){
-        suma -= web
+        suma -= parseInt(service.value)
         setPages(1)
         setLang(1)
-        setWeb(true)
+        setWeb(false)
         viewPanel = false
         pricePagesAndLang = 0
       }else{
         if(service.name === 'Seo'){
-          suma -= seo
+          suma -= parseInt(service.value)
           setSeo(false)
         }else{
-          suma -= ads
+          suma -= parseInt(service.value)
           setAds(false)
         }        
       }        
@@ -83,15 +83,14 @@ export default function App() {
   setAds(localStorage.getItem('ads'));
  }  */
   
- const saveData = ()=>{
-  localStorage.setItem('web', web);
-  localStorage.setItem('pages', pages);
-  localStorage.setItem('lang', lang);
-  localStorage.setItem('seo', seo);
-  localStorage.setItem('ads', ads);
-  setSavedData(true);
+  const saveData = ()=>{
+    localStorage.setItem('web', web);
+    localStorage.setItem('pages', pages);
+    localStorage.setItem('lang', lang);
+    localStorage.setItem('seo', seo);
+    localStorage.setItem('ads', ads);
  }
-
+ 
 
   return (
     <div className="App">
