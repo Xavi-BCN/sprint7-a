@@ -9,13 +9,13 @@ let pricePagesAndLang = 0
 let viewPanel = false;
 
 export default function App() {
-  
   const [web, setWeb] = useState(false);
   const [seo, setSeo] = useState(false);
   const [ads, setAds] = useState(false);
   const [pages, setPages] = useState(1);
   const [lang, setLang] = useState(1);
   const [total, setTotal ] = useState(0);
+  const [listBudgets, setListBudgets] = useState([]);
   
 
   const handlePages = (numOfPages) =>{
@@ -63,12 +63,17 @@ export default function App() {
       }        
     }  
   };
+
+  /* function createNewBugetItem(web, pages, lang, seo, ads){
+    setListBudgets([...listBudgets, {servicio1: web, Paginas: pages, idiomas: lang, servicio2: seo, servicio3: ads}]); 
+  } */
   
   console.log(web, pages, lang, seo, ads)
   
   useEffect(() => {
     
     //getData();
+    
     sumaweb = (pages * lang * pricePagesAndLang)
     setTotal(suma + sumaweb)
 
@@ -84,11 +89,16 @@ export default function App() {
  }  */
   
   const saveData = ()=>{
+    
+    //setListBudgets([...listBudgets, {servicio1: web, Paginas: pages, idiomas: lang, servicio2: seo, servicio3: ads}]);
     localStorage.setItem('web', web);
     localStorage.setItem('pages', pages);
     localStorage.setItem('lang', lang);
     localStorage.setItem('seo', seo);
     localStorage.setItem('ads', ads);
+    /* const bugetItem = createNewBugetItem(web, pages, lang, seo, ads);
+    localStorage.setItem('Presupuesto', bugetItem);
+    console.log(listBudgets) */
  }
  
 
