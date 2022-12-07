@@ -7,12 +7,22 @@ let suma = 0;
 let sumaweb = 0;
 let pricePagesAndLang = 0
 let viewPanel = false;
-let bugetItem;
+
 
 export default function App() {
   
+  const [inStorage, setinStorage] = useState('');
   
+  if(localStorage.getItem('Presupuesto') == undefined ){
+    console.log('No Hay datos')
+    //const [listBudgets, setListBudgets] = useState([]);  
+  }else{
+    
+    console.log('hay datos') 
+    //setinStorage(localStorage.getItem('Presupuesto'))
+  } 
   
+  //setListBudgets([listBudgets])
   const [web, setWeb] = useState(false);
   const [seo, setSeo] = useState(false);
   const [ads, setAds] = useState(false);
@@ -21,7 +31,9 @@ export default function App() {
   const [total, setTotal ] = useState(0);
   const [listBudgets, setListBudgets] = useState([]);
   
-
+  
+  
+  
   const handlePages = (numOfPages) =>{
     setPages(numOfPages);
   };
@@ -70,28 +82,29 @@ export default function App() {
 
   
   useEffect(() => {
-    
     //getData();
     
     sumaweb = (pages * lang * pricePagesAndLang)
     setTotal(suma + sumaweb)
-    
-    
   }, [web, seo, ads, pages, lang])
 
   useEffect(() => {
-    console.log(`Ha cambiado ${listBudgets}`)
-    localStorage.setItem('Presupuesto',JSON.stringify(listBudgets));}
-    , [listBudgets])
+    
+    if (listBudgets.length != 0){
+      localStorage.setItem('Presupuesto',JSON.stringify(listBudgets)) 
+      console.log(JSON.stringify(listBudgets))  
+    } 
+  },[listBudgets])
   
-/*   const getData = () => {
-    setWeb(localStorage.getItem('presupuesto'));
+   /* const getData = () => {
+    setWeb(localStorage.getItem(presupuesto.web));
+    setPages(localStorage.getItem(presupuesto.pages));
     
   } */
   
   const saveData = ()=>{
     setListBudgets([...listBudgets, {web, pages, lang, seo, ads}]);
-    console.log(web, pages, lang, seo, ads)    
+    
  }
  
   return (
