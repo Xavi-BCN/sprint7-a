@@ -7,8 +7,12 @@ let suma = 0;
 let sumaweb = 0;
 let pricePagesAndLang = 0
 let viewPanel = false;
+let bugetItem;
 
 export default function App() {
+  
+  
+  
   const [web, setWeb] = useState(false);
   const [seo, setSeo] = useState(false);
   const [ads, setAds] = useState(false);
@@ -64,11 +68,6 @@ export default function App() {
     }  
   };
 
-  /* function createNewBugetItem(web, pages, lang, seo, ads){
-    setListBudgets([...listBudgets, {servicio1: web, Paginas: pages, idiomas: lang, servicio2: seo, servicio3: ads}]); 
-  } */
-  
-  console.log(web, pages, lang, seo, ads)
   
   useEffect(() => {
     
@@ -76,29 +75,38 @@ export default function App() {
     
     sumaweb = (pages * lang * pricePagesAndLang)
     setTotal(suma + sumaweb)
-
+    
   }, [web, seo, ads, pages, lang])
-
-
- /* const getData = () => {
-  setWeb(localStorage.getItem('web'));
-  setPages(localStorage.getItem('pages'));
-  setLang(localStorage.getItem('lang'));
-  setSeo(localStorage.getItem('seo'));
-  setAds(localStorage.getItem('ads'));
- }  */
+  
+  /* const getData = () => {
+    setWeb(localStorage.getItem('web'));
+    setPages(localStorage.getItem('pages'));
+    setLang(localStorage.getItem('lang'));
+    setSeo(localStorage.getItem('seo'));
+    setAds(localStorage.getItem('ads'));
+  }  */
+  
+  const createNewBugetItem = (web, pages, lang, seo, ads)=>{
+    
+    
+  }
+  
   
   const saveData = ()=>{
-    
-    //setListBudgets([...listBudgets, {servicio1: web, Paginas: pages, idiomas: lang, servicio2: seo, servicio3: ads}]);
-    localStorage.setItem('web', web);
+    //createNewBugetItem(web, pages, lang, seo, ads);
+  setListBudgets([...listBudgets, {web, pages, lang, seo, ads}]);
+  localStorage.setItem('Presupuesto',JSON.stringify(listBudgets));
+  console.log(web, pages, lang, seo, ads)
+  
+  
+  //createNewBugetItem(web, pages, lang, seo, ads);
+  
+  /* setListBudgets([...listBudgets, {servicio1: web, Paginas: pages, idiomas: lang, servicio2: seo, servicio3: ads}]); */
+    /* localStorage.setItem('web', web);
     localStorage.setItem('pages', pages);
     localStorage.setItem('lang', lang);
     localStorage.setItem('seo', seo);
-    localStorage.setItem('ads', ads);
-    /* const bugetItem = createNewBugetItem(web, pages, lang, seo, ads);
-    localStorage.setItem('Presupuesto', bugetItem);
-    console.log(listBudgets) */
+    localStorage.setItem('ads', ads); */
  }
  
 
