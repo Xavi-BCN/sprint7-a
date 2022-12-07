@@ -76,40 +76,24 @@ export default function App() {
     sumaweb = (pages * lang * pricePagesAndLang)
     setTotal(suma + sumaweb)
     
+    
   }, [web, seo, ads, pages, lang])
+
+  useEffect(() => {
+    console.log(`Ha cambiado ${listBudgets}`)
+    localStorage.setItem('Presupuesto',JSON.stringify(listBudgets));}
+    , [listBudgets])
   
-  /* const getData = () => {
-    setWeb(localStorage.getItem('web'));
-    setPages(localStorage.getItem('pages'));
-    setLang(localStorage.getItem('lang'));
-    setSeo(localStorage.getItem('seo'));
-    setAds(localStorage.getItem('ads'));
-  }  */
-  
-  const createNewBugetItem = (web, pages, lang, seo, ads)=>{
+/*   const getData = () => {
+    setWeb(localStorage.getItem('presupuesto'));
     
-    
-  }
-  
+  } */
   
   const saveData = ()=>{
-    //createNewBugetItem(web, pages, lang, seo, ads);
-  setListBudgets([...listBudgets, {web, pages, lang, seo, ads}]);
-  localStorage.setItem('Presupuesto',JSON.stringify(listBudgets));
-  console.log(web, pages, lang, seo, ads)
-  
-  
-  //createNewBugetItem(web, pages, lang, seo, ads);
-  
-  /* setListBudgets([...listBudgets, {servicio1: web, Paginas: pages, idiomas: lang, servicio2: seo, servicio3: ads}]); */
-    /* localStorage.setItem('web', web);
-    localStorage.setItem('pages', pages);
-    localStorage.setItem('lang', lang);
-    localStorage.setItem('seo', seo);
-    localStorage.setItem('ads', ads); */
+    setListBudgets([...listBudgets, {web, pages, lang, seo, ads}]);
+    console.log(web, pages, lang, seo, ads)    
  }
  
-
   return (
     <div className="App">
       <h3>Que dessitjes que fem?</h3><br/><br/>
