@@ -7,22 +7,11 @@ let suma = 0;
 let sumaweb = 0;
 let pricePagesAndLang = 0
 let viewPanel = false;
+let existBudget;
 
 
 export default function App() {
   
-  const [inStorage, setinStorage] = useState('');
-  
-  if(localStorage.getItem('Presupuesto') == undefined ){
-    console.log('No Hay datos')
-    //const [listBudgets, setListBudgets] = useState([]);  
-  }else{
-    
-    console.log('hay datos') 
-    //setinStorage(localStorage.getItem('Presupuesto'))
-  } 
-  
-  //setListBudgets([listBudgets])
   const [web, setWeb] = useState(false);
   const [seo, setSeo] = useState(false);
   const [ads, setAds] = useState(false);
@@ -30,8 +19,6 @@ export default function App() {
   const [lang, setLang] = useState(1);
   const [total, setTotal ] = useState(0);
   const [listBudgets, setListBudgets] = useState([]);
-  
-  
   
   
   const handlePages = (numOfPages) =>{
@@ -82,29 +69,47 @@ export default function App() {
 
   
   useEffect(() => {
-    //getData();
-    
+    existBudget = JSON.parse(localStorage.getItem('Presupuesto'));
+    if (existBudget) {
+      console.log('Paso Effect sin control de variabe: Si hay datos')
+      //setListBudgets(existBudget);
+      loadData(existBudget);
+    }else{
+      console.log('Paso Effect sin control de variabe: No hay datos')
+      
+    }
+  }, [])
+  
+  useEffect(() => {
     sumaweb = (pages * lang * pricePagesAndLang)
     setTotal(suma + sumaweb)
+    console.log('Paso Effect que controla todas las variables', suma)  
   }, [web, seo, ads, pages, lang])
 
   useEffect(() => {
-    
     if (listBudgets.length != 0){
       localStorage.setItem('Presupuesto',JSON.stringify(listBudgets)) 
-      console.log(JSON.stringify(listBudgets))  
-    } 
+      console.log('Paso Effect que controla listbudgets guardado en Storage', JSON.stringify(listBudgets))  
+    } else{
+      console.log('Paso Effect que controla listbudgets no guado nada',JSON.stringify(listBudgets))
+
+    }
   },[listBudgets])
   
-   /* const getData = () => {
-    setWeb(localStorage.getItem(presupuesto.web));
-    setPages(localStorage.getItem(presupuesto.pages));
+   const loadData = (existBudget) => {
     
-  } */
+    setWeb(existBudget[0].web)
+    setPages(existBudget[0].pages);
+    setLang(existBudget[0].lang);
+    setSeo(existBudget[0].seo);
+    setAds(existBudget[0].ads);
+    console.log(web,seo, ads, pages, lang)
+    
+    }
   
   const saveData = ()=>{
-    setListBudgets([...listBudgets, {web, pages, lang, seo, ads}]);
-    
+
+    setListBudgets([...listBudgets, {web, pages, lang, seo, ads}]);  
  }
  
   return (
