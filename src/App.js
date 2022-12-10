@@ -6,7 +6,6 @@ import './Styles/App.css'
 let suma = 0;
 let sumaweb = 0;
 let pricePagesAndLang = 0
-let viewPanel = false;
 let existBudget;
 
 
@@ -33,7 +32,7 @@ export default function App() {
     if(service.checked) {
       
       if(service.name === 'Web'){
-        viewPanel = true
+        
         pricePagesAndLang = 30
         suma += parseInt(service.value) 
         setWeb(true)
@@ -53,7 +52,7 @@ export default function App() {
         setPages(1)
         setLang(1)
         setWeb(false)
-        viewPanel = false
+        
         pricePagesAndLang = 0
       }else{
         if(service.name === 'Seo'){
@@ -71,29 +70,20 @@ export default function App() {
   useEffect(() => {
     existBudget = JSON.parse(localStorage.getItem('Presupuesto'));
     if (existBudget) {
-      console.log('Paso Effect sin control de variabe: Si hay datos')
-      //setListBudgets(existBudget);
       loadData(existBudget);
-    }else{
-      console.log('Paso Effect sin control de variabe: No hay datos')
-      
     }
   }, [])
   
   useEffect(() => {
     sumaweb = (pages * lang * pricePagesAndLang)
     setTotal(suma + sumaweb)
-    console.log('Paso Effect que controla todas las variables', suma)  
+      
   }, [web, seo, ads, pages, lang])
 
   useEffect(() => {
-    if (listBudgets.length != 0){
-      localStorage.setItem('Presupuesto',JSON.stringify(listBudgets)) 
-      console.log('Paso Effect que controla listbudgets guardado en Storage', JSON.stringify(listBudgets))  
-    } else{
-      console.log('Paso Effect que controla listbudgets no guado nada',JSON.stringify(listBudgets))
-
-    }
+    if (listBudgets.length !== 0){
+      localStorage.setItem('Presupuesto',JSON.stringify(listBudgets))  
+    } 
   },[listBudgets])
   
    const loadData = (existBudget) => {
@@ -103,43 +93,45 @@ export default function App() {
     setLang(existBudget[0].lang);
     setSeo(existBudget[0].seo);
     setAds(existBudget[0].ads);
-    console.log(web,seo, ads, pages, lang)
-    
+    setTotal(existBudget[0].total);
     }
   
   const saveData = ()=>{
 
-    setListBudgets([...listBudgets, {web, pages, lang, seo, ads}]);  
+    setListBudgets([...listBudgets, {web, pages, lang, seo, ads, total}]);  
  }
  
   return (
     <div className="App">
-      <h3>Que dessitjes que fem?</h3><br/><br/>
+      <h3>Què desitges que fem?</h3><br/><br/>
          <input
             id='checkyweb'
             className='form-check-input'
             type="checkbox"
             value={500}
             name='Web'
+            checked={web}
             onChange={ (e) => handleOnChange(e.target)}
             /><h5 style={{ display: "inline" }}> Una pàgina Web (500€)</h5><br/><br/>
-            {viewPanel && (<>
+            {web && (<>
             <Panel paginas={handlePages} idiomas={handleLang}/><br/></>)}
           <input
             className='form-check-input'
             type="checkbox"
             value={300}
             name='Seo'
+            checked={seo}
             onChange={ (e) => handleOnChange(e.target)}
-          /><h5 style={{ display: "inline" }}> Una consultoria SEO (300€)</h5><br/><br/>
+          /><h5 style={{ display: "inline" }}> Una consultora SEO (300€)</h5><br/><br/>
           <input
             className='form-check-input'
             type="checkbox"
             value={200}
             name='Ads'
+            checked={ads}
             onChange={ (e) => handleOnChange(e.target)}
           /><h5 style={{ display: "inline" }}> Una campanya de Google Ads (200€)</h5><br/><br/>
-      <div className="total-section">Total: {total}€</div><br/><br/>
+      <div className="total-section" defaultValue={total}>Total:{total}€</div><br/><br/>
       <button
         type="button"
         className="btn btn-primary ms-1 mt-2"
@@ -148,3 +140,4 @@ export default function App() {
   );
 }
 
+//

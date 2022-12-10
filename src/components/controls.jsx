@@ -34,6 +34,7 @@ function Controls({ control, whatInput }) {
           <input
               id={`${whatInput}`}
               className="textin form-control form-control-sm"
+              //{id === 'inputpag' ? defaultValue={pages} : defaultValue={lang}} 
               defaultValue={1}
               min={1}
               type="number"
