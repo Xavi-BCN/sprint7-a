@@ -1,27 +1,18 @@
 import '../../src/Styles/Control.css'
 
-function Controls({ control, whatInput }) {
-  
-  //const regularExpression = {isANum: /^\d{1,3}$/}
-    
-  
-  let target = document.getElementById(`${whatInput}`)
-  
+function Controls({ onChange, value }) {
+
   function increment() {
-    target.value++;
-    control(target.value)
+    onChange(value + 1)
   }
 
   function decrement() {
-    if (target.value >= 2) {
-      target.value--;
-      control(target.value)
-    }
+    if (value >= 2) onChange(value - 1)
+    else onChange(1);
   }
 
   function reset() {
-    target.value = 1;
-    control(target.value);
+    onChange(1);
   }
 
   return (
@@ -32,15 +23,13 @@ function Controls({ control, whatInput }) {
         </div>
         <div className="col-1">
           <input
-              id={`${whatInput}`}
-              className="textin form-control form-control-sm"
-              //{id === 'inputpag' ? defaultValue={pages} : defaultValue={lang}} 
-              defaultValue={1}
-              min={1}
-              type="number"
-              aria-label=".form-control-sm example"
-              onChange={(event) => control(event.target.value)}
-            />
+            className="textin form-control form-control-sm"
+            value={value}
+            min={1}
+            type="number"
+            aria-label=".form-control-sm example"
+            onChange={(event) => onChange(event.target.value)}
+          />
         </div>
         <div className="col-1">
           <button className="btnminus btn btn-outline-danger" onClick={decrement}> - </button>

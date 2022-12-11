@@ -2,20 +2,17 @@
 import { StylPanel } from "../Styles/PanelStyle";
 import Controls from "./controls";
 
-function Panel ({paginas, idiomas}){
+function Panel ({ paginas, idiomas , onPageChange, onLangChange }){
   
-    
   return (
     <>
       <StylPanel>
-      <p className="text-start ">Núm. pàgines: </p>
-      <Controls control={paginas} whatInput={'inputpag'}/>
-      <p className="text-start" >Núm. d'idiomes:</p>
-      <Controls control={idiomas} whatInput={'inputlang'}/>
+        <p className="text-start ">Núm. pàgines: </p>
+        <Controls onChange={onPageChange} value={paginas} />
+        <p className="text-start" >Núm. d'idiomes:</p>
+        <Controls onChange={onLangChange} value={idiomas} />
       </StylPanel>
     </>
   );
 }
 export default Panel;
-
-//style={{display: 'inline'}}
