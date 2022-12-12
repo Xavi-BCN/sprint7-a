@@ -1,18 +1,9 @@
-import { Link } from "react-router-dom";
-
-//import Routes from "../application/routes"
-//<Routes/>
+import '../Styles/App.css'
 
 const Home = () => {
 
-
   return (
     <>
-      <ul>
-        <li><Link to={process.env.PUBLIC_URL}>Home</Link></li>
-        <li><Link to={process.env.PUBLIC_URL + "/budgets"}>pressupostos</Link></li>
-        <li><Link to={process.env.PUBLIC_URL + "/page2"}>Page2</Link></li>
-      </ul>
       <div className="container-wellcome">
         <h1>Benvinguts al generador de pressupostos</h1>
         <img src="./Wellcome.jpg" alt="Company Logo" />

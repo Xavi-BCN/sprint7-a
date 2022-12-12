@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 export const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Navbar
+            Pressu4You
           </a>
           <button
             className="navbar-toggler"
@@ -18,17 +20,9 @@ export const Navbar = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <a className="nav-link active" aria-current="page" href="#">
-                Inicio
-              </a>
-              <a className="nav-link" href="#">
-                Características
-              </a>
-              <a className="nav-link" href="#">
-                Precios
-              </a>
-              <a className="nav-link disabled">Deshabilitado</a>
+            <div className="navbar-nav mx-auto">
+              <Link className="nav-link fw-bold" to={process.env.PUBLIC_URL}>Inici</Link>
+              <Link className="nav-link" to={process.env.PUBLIC_URL + "/budgets"}>Pressupostos</Link>
             </div>
           </div>
         </div>
