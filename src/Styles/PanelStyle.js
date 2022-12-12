@@ -5,7 +5,7 @@ export const StylPanel = PanelStyle.div`
   border: 4px solid blue;
   border-radius: 10px;
   padding: 30px 5px;
-  width: 400px;
+  width: 450px;
 `;
 
 

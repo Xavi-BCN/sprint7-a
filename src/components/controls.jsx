@@ -1,4 +1,6 @@
 import '../../src/Styles/Control.css'
+import Info from './info';
+
 
 function Controls({ onChange, value }) {
 
@@ -36,6 +38,10 @@ function Controls({ onChange, value }) {
         </div>
         <div className="col-1">
           <button className="btnreset btn btn-outline-warning" onClick={reset}> Reset</button>
+        </div>
+        <div className="col-1"></div>
+        <div className="col-1 ">
+          <Info />
         </div>
       </div>
     </div>    
