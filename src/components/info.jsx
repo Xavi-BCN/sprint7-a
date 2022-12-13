@@ -1,6 +1,5 @@
 
-
-const Info = () => { 
+const Info = ({ valor , texte}) => { 
 
 return (
 
@@ -10,21 +9,21 @@ return (
     type="button"
     className="btn btn-primary"
     data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
+    data-bs-target={'#'+texte}
   >
     i
   </button>
   {/* Modal */}
   <div
     className="modal fade"
-    id="exampleModal"
+    id={texte}
     tabIndex={-1}
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
     <div className="modal-dialog modal-dialog-centered">
       <div className="modal-content">
-        <div className="modal-body">Aqui va la quantitat de {}</div>
+        <div className="modal-body">Has triat fer una web amb {valor} {texte}</div>
         
       </div>
     </div>
