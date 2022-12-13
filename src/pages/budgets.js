@@ -1,6 +1,7 @@
 
 import { useState,useEffect } from 'react'
 import Panel from '../components/Panel'
+import PanelBudgetsList from '../components/PanelBudgetsList';
 
 let existBudget;
 let suma = 0;
@@ -166,6 +167,12 @@ export default function Budgets() {
         type="button"
         className="btn btn-primary ms-1 mt-2"
         onClick={deleteData}>Esborrar</button>
+      <div className='container-list position-absolute top-0 end-0'>LIST CONTAINER
+          <PanelBudgetsList />
+        <div className='container-item'>ITEM CONATINER
+        
+        </div>
+      </div>
     </div>
   );
 }
