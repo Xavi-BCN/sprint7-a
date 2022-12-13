@@ -22,7 +22,7 @@ export const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav mx-auto">
               <Link className="nav-link fw-bold" to={process.env.PUBLIC_URL}>Inici</Link>
-              <Link className="nav-link fw-bold" to={process.env.PUBLIC_URL + "/budgets"}>Pressupostos</Link>
+              <Link className="nav-link fw-bold" to={process.env.PUBLIC_URL + "/budgets"}>Generar Pressupost</Link>
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import Panel from '../components/Panel'
 
 let existBudget;
 let suma = 0;
+let date;
 
 export default function Budgets() {
   
@@ -16,8 +17,14 @@ export default function Budgets() {
   const [budgetName, setBudgetName ] = useState('');
   const [costumerName, setCostumerName ] = useState('');
   const [dateBudget, setDateBudget ] = useState('');
-  
   const [listBudgets, setListBudgets] = useState([]);
+
+  function getNow(){
+    const current = new Date();
+    date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    return setDateBudget(date);
+  }
+  
     
   const calculateBudget = () => {
     let priceWeb, priceSeo, priceAds = 0
@@ -85,14 +92,14 @@ export default function Budgets() {
     setAds(existBudget[0].ads);
     setBudgetName(existBudget[0].budgetName);
     setCostumerName(existBudget[0].costumerName);
-    setDateBudget(existBudget[0].dateBudget);
+    setDateBudget(existBudget[0].date);
     setTotal(existBudget[0].total);
   }
   
   const saveData = ()=>{
-    //setListBudgets([...listBudgets, {budgetName, dateBudget, costumerName, web, pages, lang, seo, ads, total}]);  Para mas de un presu
-    console.log('Guardado en Array de Presupuestos')
-    setListBudgets([{budgetName, dateBudget, costumerName, web, pages, lang, seo, ads, total}]);  // Para un solo presu
+    getNow()
+    setListBudgets([...listBudgets, {budgetName, date, costumerName, web, pages, lang, seo, ads, total}]);  //Para mas de un presu
+    //setListBudgets([{budgetName, date, costumerName, web, pages, lang, seo, ads, total}]);  // Para un solo presu
  }
  
  const deleteData = ()=>{
@@ -104,6 +111,7 @@ export default function Budgets() {
 
   return (
     <div className="App">
+      <div>Data del pressupost: {dateBudget}</div><br/>
       <input
        className='form-control w-25 p-2'
        type="text"
