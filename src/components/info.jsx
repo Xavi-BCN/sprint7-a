@@ -21,7 +21,7 @@ return (
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-    <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-dialog modal-dialog-centered  modal-sm">
       <div className="modal-content">
         <div className="modal-body">Has triat fer una web amb {valor} {texte}</div>
         

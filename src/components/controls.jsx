@@ -2,7 +2,7 @@ import '../../src/Styles/Control.css'
 import Info from './info';
 
 
-function Controls({ onChange, value }) {
+function Controls({ onChange, value, literal }) {
 
   function increment() {
     onChange(value + 1)
@@ -41,7 +41,7 @@ function Controls({ onChange, value }) {
         </div>
         <div className="col-1"></div>
         <div className="col-1 ">
-          <Info />
+          <Info valor={value} texte={literal}/>
         </div>
       </div>
     </div>    

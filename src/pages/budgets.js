@@ -13,6 +13,10 @@ export default function Budgets() {
   const [pages, setPages] = useState(1);
   const [lang, setLang] = useState(1);
   const [total, setTotal ] = useState(0);
+  const [budgetName, setBudgetName ] = useState('');
+  const [costumerName, setCostumerName ] = useState('');
+  const [dateBudget, setDateBudget ] = useState('');
+  
   const [listBudgets, setListBudgets] = useState([]);
     
   const calculateBudget = () => {
@@ -59,10 +63,8 @@ export default function Budgets() {
   }
 
   useEffect(() => {
-    console.log('Paso por UsseEfect sin control de variables')
     existBudget = JSON.parse(localStorage.getItem('Presupuesto'));
     if (existBudget) {
-      console.log('Paso por UsseEfect sin control de variables, existe LOCALSTORAGE lleno')
       loadData(existBudget);      
     }
   }, [])
@@ -81,13 +83,16 @@ export default function Budgets() {
     setLang(existBudget[0].lang);
     setSeo(existBudget[0].seo);
     setAds(existBudget[0].ads);
+    setBudgetName(existBudget[0].budgetName);
+    setCostumerName(existBudget[0].costumerName);
+    setDateBudget(existBudget[0].dateBudget);
     setTotal(existBudget[0].total);
   }
   
   const saveData = ()=>{
-    //setListBudgets([...listBudgets, {web, pages, lang, seo, ads, total}]);  Para mas de un presu
+    //setListBudgets([...listBudgets, {budgetName, dateBudget, costumerName, web, pages, lang, seo, ads, total}]);  Para mas de un presu
     console.log('Guardado en Array de Presupuestos')
-    setListBudgets([{web, pages, lang, seo, ads, total}]);  // Para un solo presu
+    setListBudgets([{budgetName, dateBudget, costumerName, web, pages, lang, seo, ads, total}]);  // Para un solo presu
  }
  
  const deleteData = ()=>{
@@ -99,6 +104,21 @@ export default function Budgets() {
 
   return (
     <div className="App">
+      <input
+       className='form-control w-25 p-2'
+       type="text"
+       placeholder="Introdueix Nom de client"
+       onChange={ (e) => setCostumerName(e.target.value)}
+       value={costumerName}
+       >
+       </input>
+      <input
+        className='form-control w-25 p-2'
+        type="text"
+        placeholder="Introdueix Nom pel pressupost"
+        onChange={ (e) => setBudgetName(e.target.value)}
+        value={budgetName}>
+        </input>
       <h3>Què desitges que fem?</h3><br/><br/>
           <input
             id='checkyweb'

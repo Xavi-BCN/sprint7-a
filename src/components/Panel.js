@@ -8,9 +8,9 @@ function Panel ({ paginas, idiomas , onPageChange, onLangChange }){
     <>
       <StylPanel>
         <p className="text-start ">Núm. pàgines: </p>
-        <Controls onChange={onPageChange} value={paginas} />
+        <Controls onChange={onPageChange} value={paginas} literal='pàgines'/>
         <p className="text-start" >Núm. d'idiomes:</p>
-        <Controls onChange={onLangChange} value={idiomas} />
+        <Controls onChange={onLangChange} value={idiomas} literal='idiomes'/>
       </StylPanel>
     </>
   );
