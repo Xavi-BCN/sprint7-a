@@ -1,10 +1,9 @@
-//import BudgetItem from "./BudgetItem"
 import { useEffect } from "react";
 import BudgetItem from "./BudgetItem";
 
 const PanelBudgetsList = ({ data }) => {
     
-    //useEffect(() => {}, [data]);
+    useEffect(() => {}, [data]);
 
   return (
     <>
