@@ -73,6 +73,7 @@ export default function Budgets() {
   useEffect(() => {
     existBudget = JSON.parse(localStorage.getItem('Presupuesto'));
     if (existBudget) {
+      //PanelBudgetsList();
       loadData(existBudget);      
     }
   }, [])
@@ -112,7 +113,7 @@ export default function Budgets() {
 
   return (
     <div className="App">
-      <div>Data del pressupost: {dateBudget}</div><br/>
+      <div className='py-3'>Data del pressupost: {dateBudget}</div><br/>
       <input
        className='form-control w-25 p-2'
        type="text"
@@ -166,12 +167,9 @@ export default function Budgets() {
         <button
         type="button"
         className="btn btn-primary ms-1 mt-2"
-        onClick={deleteData}>Esborrar</button>
-      <div className='container-list position-absolute top-0 end-0'>LIST CONTAINER
-          <PanelBudgetsList />
-        <div className='container-item'>ITEM CONATINER
-        
-        </div>
+        onClick={deleteData}>Esborrar</button><br/><br/>
+      <div className='container-list text-warning bg-dark position-absolute top-0 end-0 w-50 p-3 mt-5 overflow-auto mh-100'>LLISTAT DE PRESSUPOSTOS
+          <PanelBudgetsList data={listBudgets} />
       </div>
     </div>
   );

@@ -3,9 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  overflow-y:hidden
+}
 
 .App{
   margin: 50px;
+  max-height: 800px;
 }
 
 label{
@@ -27,4 +31,8 @@ label{
 
 .form-control{
   margin-bottom: 20px;
+}
+
+.container-list{
+  max-height: 600px;
 }
