@@ -168,7 +168,7 @@ export default function Budgets() {
         type="button"
         className="btn btn-primary ms-1 mt-2"
         onClick={deleteData}>Esborrar</button><br/><br/>
-      <div className='container-list text-warning bg-dark position-absolute top-0 end-0 w-50 p-3 mt-5 overflow-auto mh-100'>LLISTAT DE PRESSUPOSTOS
+      <div className='container-list text-danger position-absolute top-0 end-0 w-50 p-3 mt-5 overflow-auto mh-100'>LLISTAT DE PRESSUPOSTOS
           <PanelBudgetsList data={listBudgets} />
       </div>
     </div>
