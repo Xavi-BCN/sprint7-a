@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import Filter from "../components/Filter";
 import Panel from "../components/Panel";
 import PanelBudgetsList from "../components/PanelBudgetsList";
 
 let existBudget;
-let suma = 0;
 let date;
+let suma = 0;
 
 export default function Budgets() {
   const [web, setWeb] = useState(false);
@@ -17,7 +18,7 @@ export default function Budgets() {
   const [costumerName, setCostumerName] = useState("");
   const [dateBudget, setDateBudget] = useState("");
   const [listBudgets, setListBudgets] = useState([]);
-
+  
   function getNow() {
     const current = new Date();
     date = `${current.getDate()}/${
@@ -74,6 +75,7 @@ export default function Budgets() {
   useEffect(() => {
     existBudget = JSON.parse(localStorage.getItem("Presupuesto"));
     if (existBudget) {
+      //setListBudgets(existBudget)
       //PanelBudgetsList();
       loadData(existBudget);
     }
@@ -104,6 +106,7 @@ export default function Budgets() {
   const saveData = () => {
     if (web || seo || ads) {
       getNow();
+
       setListBudgets([
         ...listBudgets,
         { budgetName, date, costumerName, web, pages, lang, seo, ads, total },
@@ -129,7 +132,7 @@ export default function Budgets() {
           type="text"
           placeholder="Introdueix Nom pel pressupost"
           onChange={(e) => setBudgetName(e.target.value)}
-          value={budgetName}
+          value={budgetName.toUpperCase()}
         ></input>
         <input
           className="form-control w-50 p-2"
@@ -175,7 +178,6 @@ export default function Budgets() {
         <h5 style={{ display: "inline" }}> Una consultora SEO (300€)</h5>
         <br />
         <br />
-
         <input
           className="form-check-input"
           type="checkbox"
@@ -212,7 +214,8 @@ export default function Budgets() {
         <span className="noCheckeds d-none">No hi ha res seleccionat</span>
       </div>
       <div className="container-list-presu col-12 col-lg-6">
-      <div className="container-list text-danger position-absolute p-3 mt-5 overflow-auto mh-100">
+        <Filter />
+      <div className="container-list text-danger sticky-top overflow: auto p-3 mt-5 mh-100">
         LLISTAT DE PRESSUPOSTOS
         <PanelBudgetsList data={listBudgets} />
       </div>

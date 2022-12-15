@@ -19,3 +19,6 @@ const PanelBudgetsList = ({ data }) => {
 };
 
 export default PanelBudgetsList;
+
+//.sort((a, b) => a.date > b.date)
+//.sort((x, y) => x.name.localeCompare(y.name));
