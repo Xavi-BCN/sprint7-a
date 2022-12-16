@@ -18,7 +18,7 @@ export default function Budgets() {
   const [costumerName, setCostumerName] = useState("");
   const [dateBudget, setDateBudget] = useState("");
   const [listBudgets, setListBudgets] = useState([]);
-  
+
   function getNow() {
     const current = new Date();
     date = `${current.getDate()}/${
@@ -75,9 +75,7 @@ export default function Budgets() {
   useEffect(() => {
     existBudget = JSON.parse(localStorage.getItem("Presupuesto"));
     if (existBudget) {
-      //setListBudgets(existBudget)
-      //PanelBudgetsList();
-      loadData(existBudget);
+      setListBudgets(existBudget);
     }
   }, []);
 
@@ -91,16 +89,17 @@ export default function Budgets() {
     }
   }, [listBudgets]);
 
-  const loadData = (existBudget) => {
-    setWeb(existBudget[0].web);
-    setPages(existBudget[0].pages);
-    setLang(existBudget[0].lang);
-    setSeo(existBudget[0].seo);
-    setAds(existBudget[0].ads);
-    setBudgetName(existBudget[0].budgetName);
-    setCostumerName(existBudget[0].costumerName);
-    setDateBudget(existBudget[0].date);
-    setTotal(existBudget[0].total);
+  //const loadData = (existBudget) => {
+  const loadData = (listBudgets) => {
+    setWeb(listBudgets[0].web);
+    setPages(listBudgets[0].pages);
+    setLang(listBudgets[0].lang);
+    setSeo(listBudgets[0].seo);
+    setAds(listBudgets[0].ads);
+    setBudgetName(listBudgets[0].budgetName);
+    setCostumerName(listBudgets[0].costumerName);
+    setDateBudget(listBudgets[0].date);
+    setTotal(listBudgets[0].total);
   };
 
   const saveData = () => {
@@ -123,103 +122,109 @@ export default function Budgets() {
 
   return (
     <div className="container App">
-       <div className="row">
-      <div className="container-presu col-12 col-lg-6">
-        <div className="py-3">Data del pressupost: {dateBudget}</div>
-        <br />
-        <input
-          className="form-control w-50 p-2"
-          type="text"
-          placeholder="Introdueix Nom pel pressupost"
-          onChange={(e) => setBudgetName(e.target.value)}
-          value={budgetName.toUpperCase()}
-        ></input>
-        <input
-          className="form-control w-50 p-2"
-          type="text"
-          placeholder="Introdueix Nom de client"
-          onChange={(e) => setCostumerName(e.target.value)}
-          value={costumerName}
-        ></input>
-        <h3>Què desitges que fem?</h3>
-        <br />
-        <br />
-        <input
-          id="checkyweb"
-          className="form-check-input"
-          type="checkbox"
-          value={500}
-          name="Web"
-          checked={web}
-          onChange={(e) => handleOnChangeWeb(e.target.checked, e.target.value)}
-        />
-        <h5 style={{ display: "inline" }}> Una pàgina Web (500€)</h5>
-        <br />
-        <br />
-        {web && (
-          <>
-            <Panel
-              paginas={pages}
-              idiomas={lang}
-              onPageChange={handlePages}
-              onLangChange={handleLang}
-            />
-            <br />
-          </>
-        )}
-        <input
-          className="form-check-input"
-          type="checkbox"
-          value={300}
-          name="Seo"
-          checked={seo}
-          onChange={(e) => handleOnChangeSeo(e.target.checked, e.target.value)}
-        />
-        <h5 style={{ display: "inline" }}> Una consultora SEO (300€)</h5>
-        <br />
-        <br />
-        <input
-          className="form-check-input"
-          type="checkbox"
-          value={200}
-          name="Ads"
-          checked={ads}
-          onChange={(e) => handleOnChangeAds(e.target.checked, e.target.value)}
-        />
-        <h5 style={{ display: "inline" }}>
-          {" "}
-          Una campanya de Google Ads (200€)
-        </h5>
-        <br />
-        <br />
-        <div className="total-section">Total: {total}€</div>
-        <br />
-        <br />
-        <button
-          type="button"
-          className="btn btn-primary ms-1 mt-2"
-          onClick={saveData}
-        >
-          Desar
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary ms-1 mt-2"
-          onClick={deleteData}
-        >
-          Esborrar
-        </button>
-        <br />
-        <br />
-        <span className="noCheckeds d-none">No hi ha res seleccionat</span>
-      </div>
-      <div className="container-list-presu col-12 col-lg-6">
-        <Filter />
-      <div className="container-list text-danger sticky-top overflow: auto p-3 mt-5 mh-100">
-        LLISTAT DE PRESSUPOSTOS
-        <PanelBudgetsList data={listBudgets} />
-      </div>
-      </div>
+      <div className="row">
+        <div className="container-presu col-12 col-lg-6">
+          <div className="py-3">Data del pressupost: {dateBudget}</div>
+          <br />
+          <input
+            className="form-control w-50 p-2"
+            type="text"
+            placeholder="Introdueix Nom pel pressupost"
+            onChange={(e) => setBudgetName(e.target.value)}
+            value={budgetName.toUpperCase() }
+          ></input>
+          <input
+            className="form-control w-50 p-2"
+            type="text"
+            placeholder="Introdueix Nom de client"
+            onChange={(e) => setCostumerName(e.target.value)}
+            value={costumerName}
+          ></input>
+          <h3>Què desitges que fem?</h3>
+          <br />
+          <br />
+          <input
+            id="checkyweb"
+            className="form-check-input"
+            type="checkbox"
+            value={500}
+            name="Web"
+            checked={web}
+            onChange={(e) =>
+              handleOnChangeWeb(e.target.checked, e.target.value)
+            }
+          />
+          <h5 style={{ display: "inline" }}> Una pàgina Web (500€)</h5>
+          <br />
+          <br />
+          {web && (
+            <>
+              <Panel
+                paginas={pages}
+                idiomas={lang}
+                onPageChange={handlePages}
+                onLangChange={handleLang}
+              />
+              <br />
+            </>
+          )}
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value={300}
+            name="Seo"
+            checked={seo}
+            onChange={(e) =>
+              handleOnChangeSeo(e.target.checked, e.target.value)
+            }
+          />
+          <h5 style={{ display: "inline" }}> Una consultora SEO (300€)</h5>
+          <br />
+          <br />
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value={200}
+            name="Ads"
+            checked={ads}
+            onChange={(e) =>
+              handleOnChangeAds(e.target.checked, e.target.value)
+            }
+          />
+          <h5 style={{ display: "inline" }}>
+            {" "}
+            Una campanya de Google Ads (200€)
+          </h5>
+          <br />
+          <br />
+          <div className="total-section">Total: {total}€</div>
+          <br />
+          <br />
+          <button
+            type="button"
+            className="btn btn-primary ms-1 mt-2"
+            onClick={saveData}
+          >
+            Desar
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary ms-1 mt-2"
+            onClick={deleteData}
+          >
+            Esborrar
+          </button>
+          <br />
+          <br />
+          <span className="noCheckeds d-none">No hi ha res seleccionat</span>
+        </div>
+        <div className="container-list-presu col-12 col-lg-6">
+          <Filter />
+          <div className="container-list text-danger sticky-top overflow: auto p-3 mt-5 mh-100">
+            LLISTAT DE PRESSUPOSTOS
+            <PanelBudgetsList data={listBudgets} />
+          </div>
+        </div>
       </div>
     </div>
   );
