@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 
-function BudgetItem({ presu, i }) {
+function BudgetItem({ presu, i , action}) {
   //const arrayBudguets = JSON.parse(localStorage.getItem('Presupuesto')) ?? []
 
   /*  useEffect(() => { 
@@ -28,7 +28,7 @@ function BudgetItem({ presu, i }) {
           </div>
           <div class="card-footer"><br /><br />
             <button /* onClick={() => actionModify(i)} */ name="btn-modify" type="button" className="btn btn-outline-warning ms-1">Modificar</button>
-            <button /* onClick={() => actionDelete(i)} */ name="btn-delete" type="button" className="btn btn-outline-danger ms-2">Eliminar</button>
+            <button  onClick={() => action(i)} name="btn-delete" type="button" className="btn btn-outline-danger ms-2">Eliminar</button>
             <button /* onClick={() => actionPrint(i)} */ name="btn-print" type="button" className="btn btn-outline-primary ms-2">Imprimir</button>
           </div>
         </div>

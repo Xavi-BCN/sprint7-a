@@ -120,6 +120,19 @@ export default function Budgets() {
     window.location.reload(true);
   };
 
+  const actionOnDelete = (value) => {
+    console.log('este es el indice a borrar', value)
+    //listBudgets.slice(value, 1)
+    //console.log(listBudgets)
+    const tempArray = listBudgets.map((item, index)=> {
+      if(index !== value){
+        return item
+      }
+    })
+    console.log(tempArray)
+    //setListBudgets([listBudgets])
+  }
+
   return (
     <div className="container App">
       <div className="row">
@@ -222,7 +235,7 @@ export default function Budgets() {
           <Filter />
           <div className="container-list text-danger sticky-top overflow: auto p-3 mt-5 mh-100">
             LLISTAT DE PRESSUPOSTOS
-            <PanelBudgetsList data={listBudgets} />
+            <PanelBudgetsList data={listBudgets} action={actionOnDelete} />
           </div>
         </div>
       </div>
