@@ -86,6 +86,8 @@ export default function Budgets() {
   useEffect(() => {
     if (listBudgets.length !== 0) {
       localStorage.setItem("Presupuesto", JSON.stringify(listBudgets));
+    }else if(listBudgets.length === 0){
+      localStorage.removeItem('Presupuesto');
     }
   }, [listBudgets]);
 
@@ -122,15 +124,16 @@ export default function Budgets() {
 
   const actionOnDelete = (value) => {
     console.log('este es el indice a borrar', value)
-    //listBudgets.slice(value, 1)
-    //console.log(listBudgets)
-    const tempArray = listBudgets.map((item, index)=> {
+    listBudgets.splice(value, 1)
+    console.log(listBudgets)
+    /* const tempArray = listBudgets.map((item, index)=> {
       if(index !== value){
         return item
       }
-    })
-    console.log(tempArray)
-    //setListBudgets([listBudgets])
+    }) */
+    //console.log(tempArray)
+    setListBudgets([listBudgets]);
+    
   }
 
   return (

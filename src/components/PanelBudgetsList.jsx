@@ -21,15 +21,34 @@ const PanelBudgetsList = ({ data, action }) => {
       //setlistBudgets(listBudgets.slice(i, 1));
     } */
 
+    
+
   return (
     <>
-    {data.map((presu,i) => {
+    {(data.length === 0) ? <h1>No items</h1> : data.map((presu,index) => {
+        return (
+            //<>
+                <BudgetItem presu={presu} i={index} action={action}/>
+            //</>
+        )
+    })
+
+    
+    }
+    
+  
+    
+    {/* <>
+    {  
+      data.map((presu,index) => {
         return (
             <>
-                <BudgetItem presu={presu} i={i} action={action}/>
+                <BudgetItem presu={presu} i={index} action={action}/>
             </>
         )
-    })}
+    })
+  }
+    </> */}
     </>
   );
 };
