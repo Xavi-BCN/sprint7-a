@@ -17,7 +17,7 @@ export default function Budgets() {
   const [budgetName, setBudgetName] = useState("");
   const [costumerName, setCostumerName] = useState("");
   const [dateBudget, setDateBudget] = useState("");
-  const [listBudgets, setListBudgets] = useState([]);
+  const [listBudgets, setListBudgets] = useState( JSON.parse(localStorage.getItem("Presupuesto")) ?? []);
 
   function getNow() {
     const current = new Date();
@@ -72,26 +72,18 @@ export default function Budgets() {
     }
   };
 
-  useEffect(() => {
-    existBudget = JSON.parse(localStorage.getItem("Presupuesto"));
-    if (existBudget) {
-      setListBudgets(existBudget);
-    }
-  }, []);
+ 
 
   useEffect(() => {
     setTotal(calculateBudget());
   }, [web, seo, ads, pages, lang]);
 
   useEffect(() => {
-    if (listBudgets.length !== 0) {
       localStorage.setItem("Presupuesto", JSON.stringify(listBudgets));
-    }else if(listBudgets.length === 0){
-      localStorage.removeItem('Presupuesto');
     }
-  }, [listBudgets]);
+  , [listBudgets]);
 
-  //const loadData = (existBudget) => {
+
   const loadData = (listBudgets) => {
     setWeb(listBudgets[0].web);
     setPages(listBudgets[0].pages);
@@ -123,18 +115,15 @@ export default function Budgets() {
   };
 
   const actionOnDelete = (value) => {
-    console.log('este es el indice a borrar', value)
-    listBudgets.splice(value, 1)
-    console.log(listBudgets)
-    /* const tempArray = listBudgets.map((item, index)=> {
+       
+    const tempArray = listBudgets.filter((item, index)=> {
+      console.log(item);
       if(index !== value){
         return item
       }
-    }) */
-    //console.log(tempArray)
-    setListBudgets([listBudgets]);
-    
-  }
+    }) 
+    setListBudgets(tempArray);
+  };
 
   return (
     <div className="container App">
@@ -147,7 +136,7 @@ export default function Budgets() {
             type="text"
             placeholder="Introdueix Nom pel pressupost"
             onChange={(e) => setBudgetName(e.target.value)}
-            value={budgetName.toUpperCase() }
+            value={budgetName.toUpperCase()}
           ></input>
           <input
             className="form-control w-50 p-2"

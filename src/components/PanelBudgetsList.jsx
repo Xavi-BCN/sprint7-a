@@ -3,7 +3,7 @@ import BudgetItem from "./BudgetItem";
 
 const PanelBudgetsList = ({ data, action }) => {
     
-    useEffect(() => {}, [data]);
+    //useEffect(() => {}, [data]);
 
     /* function actionDelete(i){
       alert(`Eliminar registro ${i}`)
