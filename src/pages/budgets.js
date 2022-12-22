@@ -24,7 +24,7 @@ export default function Budgets() {
     const current = new Date();
     date = `${current.getDate()}/${
       current.getMonth() + 1
-    }/${current.getFullYear()}`;
+    }/${current.getFullYear()}/${current.getMinutes()} `;
     return setDateBudget(date);
   }
 
