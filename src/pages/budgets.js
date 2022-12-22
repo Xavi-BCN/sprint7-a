@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Filter from "../components/Filter";
 import Panel from "../components/Panel";
 import PanelBudgetsList from "../components/PanelBudgetsList";
 
@@ -101,25 +100,19 @@ export default function Budgets() {
   const saveData = () => {
 
     if (web || seo || ads || budgetName || costumerName) {
-       
+
+      if (budgetModyfying !== -1){
+        listBudgets.splice(budgetModyfying, 1);
+      }
+      budgetModyfying = -1
+
        getNow();    
        setListBudgets([
          ...listBudgets,
          { budgetName, date, costumerName, web, pages, lang, seo, ads, total },
-        ]);
-        
+        ]); 
         initForm();  
       }
-     
-  
-      /* if (budgetModyfying !== -1){
-      console.log(budgetModyfying)
-      onDeleteBudget(budgetModyfying);
-      initForm(); 
-      budgetModyfying = -1
-      alert(budgetModyfying)
-    } */
-
   };
 
   
@@ -132,7 +125,7 @@ export default function Budgets() {
   };
 
   const onDeleteBudget = (value) => {
-    console.log(' este es el valor del registro a leiminar', value) 
+    
     budgetModyfying = -1  
     const tempArray = listBudgets.filter((item, index)=> {
       if(index !== value){
@@ -257,9 +250,7 @@ export default function Budgets() {
           <span className="noCheckeds d-none">No hi ha res seleccionat</span>
         </div>
         <div className="container-list-presu col-12 col-lg-6">
-          <Filter />
           <div className="container-list text-danger sticky-top overflow: auto p-3 mt-5 mh-100">
-            LLISTAT DE PRESSUPOSTOS
             <PanelBudgetsList data={listBudgets} actionDelete={onDeleteBudget} actionModify={onModifyBudget} />
           </div>
         </div>

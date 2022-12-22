@@ -13,7 +13,7 @@ function BudgetItem({ presu, i , actionDelete, actionModify}) {
 
   return (
     <div className="container-item" key={i} id={i}>
-      <div className="card text-info mt-3 w-100 shadow p-3 mb-5 bg-light.bg-gradient rounded" style={{ width: "9rem" }}>
+      <div className="card text-info mt-3 w-100 shadow p-3 mb-5 bg-light.bg-gradient rounded" style={{ width: "1rem" }}>
         <div className="card-body">
           
           <h1 className="card-title text-warning bg-dark">{presu.budgetName}</h1>

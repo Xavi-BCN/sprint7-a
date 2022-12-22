@@ -1,54 +1,49 @@
 import { useEffect } from "react";
 import BudgetItem from "./BudgetItem";
 
-const PanelBudgetsList = ({ data, actionDelete, actionModify  }) => {
-    
-    //useEffect(() => {}, [data]);
+const PanelBudgetsList = ({ data, actionDelete, actionModify }) => {
+  useEffect(() => {}, [data]);
 
-    /* function actionDelete(i){
-      alert(`Eliminar registro ${i}`)
-      data.slice(i, 1);
+  function onChange(name) {
+
+  
+    if (name === 'nom'){
+      alert(name)
+      /* order = [...data]
+      .map(presu => presu.budgetName)
+      .sort() */
     }
-    function actionModify(i){
-      alert(`Modificar registro ${i}`)
-    }
-    function actionPrint(i){
-      alert(`Imprimir registro ${i}`)
-    } */
+    //return order;
+  }
 
-    /* function actions(i,name){
-      alert(i, name)
-      //setlistBudgets(listBudgets.slice(i, 1));
-    } */
-
-    
 
   return (
     <>
-    {(data.length === 0) ? <h1>No items</h1> : data.map((presu,index) => {
-        return (
-            //<>
-                <BudgetItem presu={presu} i={index} actionDelete={actionDelete} actionModify={actionModify}/>
-            //</>
-        )
-    })
-
-    
-    }
-    
+    <p>FILTRES PER APLICAR</p><br />
+    <button type="button"
+     className="nom btn btn-primary"
+     onClick={event => onChange(event.target.className)}>
+      PER NOM
+    </button>
   
-    
-    {/* <>
-    {  
-      data.map((presu,index) => {
-        return (
+  <p>LLISTAT DE PRESSUPOSTOS</p>
+
+      {data.length === 0 ? (
+        <h1>NO EXISTEIX CAP PRESSUPOST</h1>
+      ) : (
+        data.map((presu, index) => {
+          return (
             <>
-                <BudgetItem presu={presu} i={index} action={action}/>
+              <BudgetItem
+                presu={presu}
+                i={index}
+                actionDelete={actionDelete}
+                actionModify={actionModify}
+              />
             </>
-        )
-    })
-  }
-    </> */}
+          );
+        })
+      )}
     </>
   );
 };
