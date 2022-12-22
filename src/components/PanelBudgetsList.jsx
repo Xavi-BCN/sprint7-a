@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import BudgetItem from "./BudgetItem";
 
-const PanelBudgetsList = ({ data, action }) => {
+const PanelBudgetsList = ({ data, actionDelete, actionModify  }) => {
     
     //useEffect(() => {}, [data]);
 
@@ -28,7 +28,7 @@ const PanelBudgetsList = ({ data, action }) => {
     {(data.length === 0) ? <h1>No items</h1> : data.map((presu,index) => {
         return (
             //<>
-                <BudgetItem presu={presu} i={index} action={action}/>
+                <BudgetItem presu={presu} i={index} actionDelete={actionDelete} actionModify={actionModify}/>
             //</>
         )
     })

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 
-function BudgetItem({ presu, i , action}) {
+function BudgetItem({ presu, i , actionDelete, actionModify}) {
   //const arrayBudguets = JSON.parse(localStorage.getItem('Presupuesto')) ?? []
 
   /*  useEffect(() => { 
@@ -26,10 +26,11 @@ function BudgetItem({ presu, i , action}) {
             {(presu.seo) ? (<> <h4 className="text-success">Servei Seo: SI</h4></>) : <h5 className='text-danger'>Servei Seo: No contractat</h5>}
             {(presu.ads) ? (<> <h4 className="text-success">Servei Ads: SI</h4></>) : <h5 className='text-danger'>Servei Ads: No contractat</h5>}
           </div>
-          <div class="card-footer"><br /><br />
-            <button /* onClick={() => actionModify(i)} */ name="btn-modify" type="button" className="btn btn-outline-warning ms-1">Modificar</button>
-            <button  onClick={() => action(i)} name="btn-delete" type="button" className="btn btn-outline-danger ms-2">Eliminar</button>
+          <div class="card-footer pt-4"><br /><br />
+            <button onClick={() => actionModify(i)} name="btn-modify" type="button" className="btn btn-outline-warning ms-1">Modificar</button>
+            <button  onClick={() => actionDelete(i)} name="btn-delete" type="button" className="btn btn-outline-danger ms-2">Eliminar</button>
             <button /* onClick={() => actionPrint(i)} */ name="btn-print" type="button" className="btn btn-outline-primary ms-2">Imprimir</button>
+            <h6 className="text-success">Total : {presu.total}€</h6>
           </div>
         </div>
       </div>

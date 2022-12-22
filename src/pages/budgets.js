@@ -3,9 +3,9 @@ import Filter from "../components/Filter";
 import Panel from "../components/Panel";
 import PanelBudgetsList from "../components/PanelBudgetsList";
 
-let existBudget;
 let date;
 let suma = 0;
+let budgetModyfying = -1;
 
 export default function Budgets() {
   const [web, setWeb] = useState(false);
@@ -18,6 +18,8 @@ export default function Budgets() {
   const [costumerName, setCostumerName] = useState("");
   const [dateBudget, setDateBudget] = useState("");
   const [listBudgets, setListBudgets] = useState( JSON.parse(localStorage.getItem("Presupuesto")) ?? []);
+  
+  
 
   function getNow() {
     const current = new Date();
@@ -76,7 +78,7 @@ export default function Budgets() {
 
   useEffect(() => {
     setTotal(calculateBudget());
-  }, [web, seo, ads, pages, lang]);
+  }, [web, seo, ads, pages, lang ]);
 
   useEffect(() => {
       localStorage.setItem("Presupuesto", JSON.stringify(listBudgets));
@@ -84,28 +86,43 @@ export default function Budgets() {
   , [listBudgets]);
 
 
-  const loadData = (listBudgets) => {
-    setWeb(listBudgets[0].web);
-    setPages(listBudgets[0].pages);
-    setLang(listBudgets[0].lang);
-    setSeo(listBudgets[0].seo);
-    setAds(listBudgets[0].ads);
-    setBudgetName(listBudgets[0].budgetName);
-    setCostumerName(listBudgets[0].costumerName);
-    setDateBudget(listBudgets[0].date);
-    setTotal(listBudgets[0].total);
+  const initForm = () => {
+    setWeb(false);
+    setPages(1);
+    setLang(1);
+    setSeo(false);
+    setAds(false);
+    setBudgetName("");
+    setCostumerName("");
+    setDateBudget("");
+    setTotal(0);
   };
 
   const saveData = () => {
-    if (web || seo || ads) {
-      getNow();
 
-      setListBudgets([
-        ...listBudgets,
-        { budgetName, date, costumerName, web, pages, lang, seo, ads, total },
-      ]);
-    }
+    if (web || seo || ads || budgetName || costumerName) {
+       
+       getNow();    
+       setListBudgets([
+         ...listBudgets,
+         { budgetName, date, costumerName, web, pages, lang, seo, ads, total },
+        ]);
+        
+        initForm();  
+      }
+     
+  
+      /* if (budgetModyfying !== -1){
+      console.log(budgetModyfying)
+      onDeleteBudget(budgetModyfying);
+      initForm(); 
+      budgetModyfying = -1
+      alert(budgetModyfying)
+    } */
+
   };
+
+  
 
   const deleteData = () => {
     console.log("borrado de local storage");
@@ -114,16 +131,32 @@ export default function Budgets() {
     window.location.reload(true);
   };
 
-  const actionOnDelete = (value) => {
-       
+  const onDeleteBudget = (value) => {
+    console.log(' este es el valor del registro a leiminar', value) 
+    budgetModyfying = -1  
     const tempArray = listBudgets.filter((item, index)=> {
-      console.log(item);
       if(index !== value){
         return item
+      }else{
+        return null
       }
+      
     }) 
     setListBudgets(tempArray);
   };
+
+  const onModifyBudget = (value) => {
+    setWeb(listBudgets[value].web);
+    setPages(listBudgets[value].pages);
+    setLang(listBudgets[value].lang);
+    setSeo(listBudgets[value].seo);
+    setAds(listBudgets[value].ads);
+    setBudgetName(listBudgets[value].budgetName);
+    setCostumerName(listBudgets[value].costumerName);
+    setDateBudget(listBudgets[value].date);
+    setTotal(listBudgets[value].total);
+    budgetModyfying = value;
+  }
 
   return (
     <div className="container App">
@@ -214,10 +247,10 @@ export default function Budgets() {
           </button>
           <button
             type="button"
-            className="btn btn-primary ms-1 mt-2"
+            className="btn btn-danger ms-1 mt-2"
             onClick={deleteData}
           >
-            Esborrar
+            Eliminar TOTS
           </button>
           <br />
           <br />
@@ -227,7 +260,7 @@ export default function Budgets() {
           <Filter />
           <div className="container-list text-danger sticky-top overflow: auto p-3 mt-5 mh-100">
             LLISTAT DE PRESSUPOSTOS
-            <PanelBudgetsList data={listBudgets} action={actionOnDelete} />
+            <PanelBudgetsList data={listBudgets} actionDelete={onDeleteBudget} actionModify={onModifyBudget} />
           </div>
         </div>
       </div>
