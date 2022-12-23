@@ -22,9 +22,12 @@ export default function Budgets() {
 
   function getNow() {
     const current = new Date();
-    date = `${current.getDate()}/${
-      current.getMonth() + 1
-    }/${current.getFullYear()}/${current.getMinutes()} `;
+    const hour = current.getHours()
+    let min = current.getMinutes()
+    if( min < 10 ) {
+      min = '0'+ min
+    }
+    date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()} Hora ${hour}:${min}`;
     return setDateBudget(date);
   }
 
@@ -103,8 +106,8 @@ export default function Budgets() {
 
       if (budgetModyfying !== -1){
         listBudgets.splice(budgetModyfying, 1);
+        budgetModyfying = -1
       }
-      budgetModyfying = -1
 
        getNow();    
        setListBudgets([
@@ -251,7 +254,7 @@ export default function Budgets() {
         </div>
         <div className="container-list-presu col-12 col-lg-6">
           <div className="container-list text-danger sticky-top overflow: auto p-3 mt-5 mh-100">
-            <PanelBudgetsList data={listBudgets} actionDelete={onDeleteBudget} actionModify={onModifyBudget} />
+            <PanelBudgetsList listBudgets={listBudgets} setListBudgets={setListBudgets} actionDelete={onDeleteBudget} actionModify={onModifyBudget} />
           </div>
         </div>
       </div>
