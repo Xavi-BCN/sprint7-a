@@ -2,24 +2,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
-/*  body{
-   overflow-y:hidden;   
-} */
-
+ body{
+  overflow-y:auto ;
+} 
 .App{
-  
   margin: 50px;
   max-height: 800px;
 }
-
 label{
   margin-left: 10px;
 }
-
 .task-list-item{
-  margin: 10px; 
+  margin: 10px;
 }
 .total-section{
   font-weight: 700;
@@ -30,11 +25,14 @@ label{
 .container-wellcome{
   margin: 50px;
 }
-
 .form-control{
   margin-bottom: 20px;
 }
-
-.container-list{
-  max-height: 600px;
+.container-list-presu{
+  height: 225px;
+  width:auto;
+}
+.container-budgets{
+  height: 800px;
+  overflow-y:scroll ;
 }

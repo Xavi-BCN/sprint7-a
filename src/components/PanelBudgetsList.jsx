@@ -8,30 +8,20 @@ const PanelBudgetsList = ({ listBudgets, actionDelete, actionModify }) => {
   function onFilter(filter) {
     
     if (filter === 'byName') {
-      
       listBudgets.sort((x, y) => x.budgetName.localeCompare(y.budgetName))
       setAction(()=> action + 1)
-      console.log(listBudgets)
     }
-
     if (filter === 'byDate') {
-      
       listBudgets.sort((x, y) => x.date.localeCompare(y.date))
       setAction(()=> action + 1)
-      console.log(listBudgets)
     }
     if (filter === 'byTotal') {
-      
       listBudgets.sort((x, y) => (y.total)-(x.total))
       setAction(()=> action + 1)
-      console.log(listBudgets)
     }
-
     if (filter === 'byDefault') {
-      
       listBudgets.sort((x, y) => x.date.localeCompare(y.date))
       setAction(()=> action + 1)
-      console.log(listBudgets)
     }
   }
 
@@ -61,8 +51,8 @@ const PanelBudgetsList = ({ listBudgets, actionDelete, actionModify }) => {
           </button>
         </div><br />
 
-        <p>LLISTAT DE PRESSUPOSTOS</p>
-
+        <p>NUM. DE PRESSUPOSTOS: {listBudgets.length}</p>
+        <div className="container-budgets">
         {listBudgets.length === 0 ? (
           <h1>NO EXISTEIX CAP PRESSUPOST</h1>
         ) : (
@@ -80,6 +70,7 @@ const PanelBudgetsList = ({ listBudgets, actionDelete, actionModify }) => {
             );
           })
         )}
+        </div>
     </>
   );
 };

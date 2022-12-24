@@ -38,9 +38,10 @@ export default function Budgets() {
     web ? (priceWeb = 500 + pages * lang * 30) : (priceWeb = 0);
     seo ? (priceSeo = 300) : (priceSeo = 0);
     ads ? (priceAds = 200) : (priceAds = 0);
-    return priceWeb + priceSeo + priceAds;
-    /* result =  (priceWeb + priceSeo + priceAds)
-    return ((priceWeb + priceSeo + priceAds).toLocaleString('es-ES'));; */
+    //return priceWeb + priceSeo + priceAds;
+    result =  priceWeb + priceSeo + priceAds
+    result= result.toLocaleString('de-DE');
+    return result
   };
 
   const handlePages = (numOfPages) => setPages(numOfPages);
@@ -111,12 +112,10 @@ export default function Budgets() {
         budgetModyfying = -1
       }
 
-       getNow();    
-       setListBudgets([
-         ...listBudgets,
-         { budgetName, date, costumerName, web, pages, lang, seo, ads, total },
-        ]); 
-        initForm();  
+      getNow();    
+       
+      setListBudgets([{ budgetName, date, costumerName, web, pages, lang, seo, ads, total },...listBudgets])
+      initForm();  
       }
   };
 
@@ -230,7 +229,7 @@ export default function Budgets() {
           </h6>
           <br />
           <br />
-          <div className="total-section">Total: {total}</div>
+          <div className="total-section">Total: {total}€</div>
           <br />
           <br />
           <button
@@ -252,7 +251,7 @@ export default function Budgets() {
           <span className="noCheckeds d-none">No hi ha res seleccionat</span>
         </div>
         <div className="container-list-presu col-12 col-lg-6">
-          <div className="container-list text-danger sticky-top overflow: auto p-3 mt-5 mh-100">
+          <div className="container-list text-danger sticky-top p-3 mt-5 mh-100">
             <PanelBudgetsList listBudgets={listBudgets} actionDelete={onDeleteBudget} actionModify={onModifyBudget} />
           </div>
         </div>
