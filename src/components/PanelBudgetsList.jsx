@@ -1,58 +1,63 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BudgetItem from "./BudgetItem";
 
-const PanelBudgetsList = ({ listBudgets, actionDelete, actionModify, setListBudgets }) => {
+const PanelBudgetsList = ({ listBudgets, actionDelete, actionModify }) => {
   
-  const [tempArray, setTempArray] = useState([listBudgets]);
-  
-   useEffect(() => {
-    
-  }, [tempArray]);
+  const [action, setAction] = useState(0);
   
   function onFilter(filter) {
     
-    
-    
     if (filter === 'byName') {
       
-      //tempArray = listBudgets.sort((x, y) => x.budgetName.localeCompare(y.budgetName))
-      setTempArray(listBudgets.sort((x, y) => x.budgetName.localeCompare(y.budgetName)))
-      console.log(tempArray)
+      listBudgets.sort((x, y) => x.budgetName.localeCompare(y.budgetName))
+      setAction(()=> action + 1)
+      console.log(listBudgets)
     }
 
     if (filter === 'byDate') {
       
-      //tempArray = listBudgets.sort((x, y) => x.date.localeCompare(y.date))
-      setTempArray(listBudgets.sort((x, y) => x.date.localeCompare(y.date)))
-      console.log(tempArray)
+      listBudgets.sort((x, y) => x.date.localeCompare(y.date))
+      setAction(()=> action + 1)
+      console.log(listBudgets)
     }
     if (filter === 'byTotal') {
       
-      //tempArray = listBudgets.sort((x, y) => (y.total)-(x.total) )
-      setTempArray(listBudgets.sort((x, y) => (y.total)-(x.total) ))
-      console.log(tempArray)
+      listBudgets.sort((x, y) => (y.total)-(x.total))
+      setAction(()=> action + 1)
+      console.log(listBudgets)
+    }
+
+    if (filter === 'byDefault') {
+      
+      listBudgets.sort((x, y) => x.date.localeCompare(y.date))
+      setAction(()=> action + 1)
+      console.log(listBudgets)
     }
   }
 
-
   return (
     <>
-        <p>FILTRES PER APLICAR</p>
-        <div className="container">
+        <p>FILTRES: APLICAR PER ...</p>
+        <div className="container mt-3 w-100 shadow p-3 mb-5 bg-light.bg-gradient rounded">
           <button type="button"
             className="btn btn-primary ms-0 my-auto"
             onClick={event => onFilter('byName')}>
-            PER NOM PRESSUPOST
+            NOM
           </button>
           <button type="button"
             className="btn btn-primary  ms-1 my-auto"
             onClick={event => onFilter('byDate')}>
-            PER DATA
+            DATA
           </button>
            <button type="button"
           className="btn btn-primary ms-1 my-auto"
           onClick={event => onFilter('byTotal')}>
-          IMPORT TOTAL
+          TOTAL
+          </button>
+          <button type="button"
+          className="btn btn-warning ms-1 my-auto"
+          onClick={event => onFilter('byDefault')}>
+          DEFECTE
           </button>
         </div><br />
 

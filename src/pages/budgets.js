@@ -34,11 +34,13 @@ export default function Budgets() {
   const calculateBudget = () => {
     let priceWeb,
       priceSeo,
-      priceAds = 0;
+      priceAds, result = 0;
     web ? (priceWeb = 500 + pages * lang * 30) : (priceWeb = 0);
     seo ? (priceSeo = 300) : (priceSeo = 0);
     ads ? (priceAds = 200) : (priceAds = 0);
     return priceWeb + priceSeo + priceAds;
+    /* result =  (priceWeb + priceSeo + priceAds)
+    return ((priceWeb + priceSeo + priceAds).toLocaleString('es-ES'));; */
   };
 
   const handlePages = (numOfPages) => setPages(numOfPages);
@@ -128,7 +130,6 @@ export default function Budgets() {
   };
 
   const onDeleteBudget = (value) => {
-    
     budgetModyfying = -1  
     const tempArray = listBudgets.filter((item, index)=> {
       if(index !== value){
@@ -136,7 +137,6 @@ export default function Budgets() {
       }else{
         return null
       }
-      
     }) 
     setListBudgets(tempArray);
   };
@@ -157,7 +157,7 @@ export default function Budgets() {
   return (
     <div className="container App">
       <div className="row">
-        <div className="container-presu col-12 col-lg-6">
+        <div className="container-presu col-12 col-lg-6 mt-3 shadow p-3 bg-light.bg-gradient rounded">
           <div className="py-3">Data del pressupost: {dateBudget}</div>
           <br />
           <input
@@ -174,8 +174,7 @@ export default function Budgets() {
             onChange={(e) => setCostumerName(e.target.value)}
             value={costumerName}
           ></input>
-          <h3>Què desitges que fem?</h3>
-          <br />
+          <h5>Què desitges que fem?</h5>
           <br />
           <input
             id="checkyweb"
@@ -188,7 +187,7 @@ export default function Budgets() {
               handleOnChangeWeb(e.target.checked, e.target.value)
             }
           />
-          <h5 style={{ display: "inline" }}> Una pàgina Web (500€)</h5>
+          <h6 style={{ display: "inline" }}> Una pàgina Web (500€)</h6>
           <br />
           <br />
           {web && (
@@ -212,7 +211,7 @@ export default function Budgets() {
               handleOnChangeSeo(e.target.checked, e.target.value)
             }
           />
-          <h5 style={{ display: "inline" }}> Una consultora SEO (300€)</h5>
+          <h6 style={{ display: "inline" }}> Una consultora SEO (300€)</h6>
           <br />
           <br />
           <input
@@ -225,13 +224,13 @@ export default function Budgets() {
               handleOnChangeAds(e.target.checked, e.target.value)
             }
           />
-          <h5 style={{ display: "inline" }}>
+          <h6 style={{ display: "inline" }}>
             {" "}
             Una campanya de Google Ads (200€)
-          </h5>
+          </h6>
           <br />
           <br />
-          <div className="total-section">Total: {total}€</div>
+          <div className="total-section">Total: {total}</div>
           <br />
           <br />
           <button
@@ -254,7 +253,7 @@ export default function Budgets() {
         </div>
         <div className="container-list-presu col-12 col-lg-6">
           <div className="container-list text-danger sticky-top overflow: auto p-3 mt-5 mh-100">
-            <PanelBudgetsList listBudgets={listBudgets} setListBudgets={setListBudgets} actionDelete={onDeleteBudget} actionModify={onModifyBudget} />
+            <PanelBudgetsList listBudgets={listBudgets} actionDelete={onDeleteBudget} actionModify={onModifyBudget} />
           </div>
         </div>
       </div>

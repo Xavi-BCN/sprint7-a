@@ -1,36 +1,26 @@
-import { useEffect } from "react";
-
 
 function BudgetItem({ presu, i , actionDelete, actionModify}) {
-  //const arrayBudguets = JSON.parse(localStorage.getItem('Presupuesto')) ?? []
-
-  /*  useEffect(() => { 
-        
-    },[data]) */
-
-  
-
-
+ 
   return (
     <div className="container-item" key={i} id={i}>
       <div className="card text-info mt-3 w-100 shadow p-3 mb-5 bg-light.bg-gradient rounded" style={{ width: "1rem" }}>
         <div className="card-body">
           
-          <h1 className="card-title text-warning bg-dark">{presu.budgetName}</h1>
-          <h2 className="card-subtitle mb-2 text-muted">
+          <h4 className="card-title text-warning bg-dark">{presu.budgetName}</h4>
+          <h4 className="card-subtitle mb-2 text-muted">
           {presu.costumerName}
-          </h2>
+          </h4>
           <div className="card-text">
-          <h3>Data: {presu.date}</h3>
-            {(presu.web) ? (<> <h4 className="text-success">Servei Web: SI</h4><h5>Pàgines: {presu.pages} Idiomes: {presu.lang} </h5></>) : <h5 className='text-danger'>Servei Web: No contractat</h5>}
-            {(presu.seo) ? (<> <h4 className="text-success">Servei Seo: SI</h4></>) : <h5 className='text-danger'>Servei Seo: No contractat</h5>}
-            {(presu.ads) ? (<> <h4 className="text-success">Servei Ads: SI</h4></>) : <h5 className='text-danger'>Servei Ads: No contractat</h5>}
+          <h6>Data: {presu.date}</h6>
+            {(presu.web) ? (<> <h6 className="text-success">Servei Web: SI</h6><h6>Pàgines: {presu.pages} Idiomes: {presu.lang} </h6></>) : <h6 className='text-danger'>Servei Web: No contractat</h6>}
+            {(presu.seo) ? (<> <h6 className="text-success">Servei Seo: SI</h6></>) : <h6 className='text-danger'>Servei Seo: No contractat</h6>}
+            {(presu.ads) ? (<> <h6 className="text-success">Servei Ads: SI</h6></>) : <h6 className='text-danger'>Servei Ads: No contractat</h6>}
           </div>
           <div className="card-footer pt-4"><br /><br />
             <button onClick={() => actionModify(i)} name="btn-modify" type="button" className="btn btn-outline-warning ms-1">Modificar</button>
             <button  onClick={() => actionDelete(i)} name="btn-delete" type="button" className="btn btn-outline-danger ms-2">Eliminar</button>
             <button /* onClick={() => actionPrint(i)} */ name="btn-print" type="button" className="btn btn-outline-primary ms-2">Imprimir</button>
-            <h6 className="text-success">Total : {presu.total}€</h6>
+            <h4 className="text-success">Total : {presu.total}</h4>
           </div>
         </div>
       </div>
