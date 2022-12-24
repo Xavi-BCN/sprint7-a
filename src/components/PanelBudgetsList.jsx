@@ -1,29 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BudgetItem from "./BudgetItem";
 
 const PanelBudgetsList = ({ listBudgets, actionDelete, actionModify }) => {
   
   const [action, setAction] = useState(0);
   
-  function onFilter(filter) {
+  // const [searchBudget, setSearchBudget] = useState([]);
+  //   useEffect(() => {
+  //  }, [searchBudget])
+  
+  
+
+  
+  function onFilter(filter, search) {
     
     if (filter === 'byName') {
       listBudgets.sort((x, y) => x.budgetName.localeCompare(y.budgetName))
-      setAction(()=> action + 1)
     }
     if (filter === 'byDate') {
       listBudgets.sort((x, y) => x.date.localeCompare(y.date))
-      setAction(()=> action + 1)
     }
     if (filter === 'byTotal') {
       listBudgets.sort((x, y) => (y.total)-(x.total))
-      setAction(()=> action + 1)
     }
     if (filter === 'byDefault') {
       listBudgets.sort((x, y) => x.date.localeCompare(y.date))
-      setAction(()=> action + 1)
     }
+    if (filter === 'bySearch') {
+      search = (search.toUpperCase());
+      console.log(search);
+      //listBudgets.filter(presu => presu.budgetName.includes(search,0))
+      const searchBudget = listBudgets.filter(presu => presu.budgetName.includes(search,0))
+      listBudgets = searchBudget
+      console.log(searchBudget);
+      console.log(listBudgets)
+      //console.log(listBudgets.filter(presu => presu.budgetName.includes(search,0)))
+    }
+
+    //setSearchBudget(search)
+    setAction(()=> action + 1)
   }
+
+  
+  const handleSearchBudget = (value) => {
+    //let searchBudget = (value.toUpperCase())
+    //console.log(searchBudget)
+    //listBudgets.map(presu => presu.budgetName.includes(searchBudget))
+    //listBudgets.filter(presu => presu.budgetName === searchBudget);
+    //console.log(searchBudget)
+    //setAction(()=> action + 1)
+    //setSearchBudget(value.toUpperCase())
+  }
+  
 
   return (
     <>
@@ -47,8 +75,14 @@ const PanelBudgetsList = ({ listBudgets, actionDelete, actionModify }) => {
           <button type="button"
           className="btn btn-warning ms-1 my-auto"
           onClick={event => onFilter('byDefault')}>
-          DEFECTE
+          "R"
           </button>
+          <input
+            className="form-control p-2 mt-2"
+            type="text"
+            placeholder="Cercador"
+            onChange={event => onFilter('bySearch', event.target.value)}
+          ></input>
         </div><br />
 
         <p>NUM. DE PRESSUPOSTOS: {listBudgets.length}</p>
