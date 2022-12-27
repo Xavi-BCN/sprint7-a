@@ -17,7 +17,13 @@ export default function Budgets() {
   const [costumerName, setCostumerName] = useState("");
   const [dateBudget, setDateBudget] = useState("");
   const [listBudgets, setListBudgets] = useState( JSON.parse(localStorage.getItem("Presupuesto")) ?? []);
+  const [action, setAction] = useState(0);
   
+  const [searchBudget, setSearchBudget] = useState([])
+
+  useEffect(() => {
+    setSearchBudget([...listBudgets]) 
+  }, [listBudgets])
   
 
   function getNow() {
@@ -38,10 +44,7 @@ export default function Budgets() {
     web ? (priceWeb = 500 + pages * lang * 30) : (priceWeb = 0);
     seo ? (priceSeo = 300) : (priceSeo = 0);
     ads ? (priceAds = 200) : (priceAds = 0);
-    //return priceWeb + priceSeo + priceAds;
-    result =  priceWeb + priceSeo + priceAds
-    result= result.toLocaleString('de-DE');
-    return result
+    return priceWeb + priceSeo + priceAds
   };
 
   const handlePages = (numOfPages) => setPages(numOfPages);
@@ -153,6 +156,33 @@ export default function Budgets() {
     budgetModyfying = value;
   }
 
+  
+  const onFilter = (filter, search) => {
+    
+      if (filter === 'byName') {
+        setSearchBudget(listBudgets.sort((x, y) => x.budgetName.localeCompare(y.budgetName)))
+        console.log(listBudgets)
+      }
+      if (filter === 'byDate') {
+        setSearchBudget(listBudgets.sort((x, y) => x.date.localeCompare(y.date)))
+      }
+      if (filter === 'byTotal') {
+        setSearchBudget(listBudgets.sort((x, y) => (y.total)-(x.total)))
+      }
+      if (filter === 'byDefault') {
+        setSearchBudget(listBudgets.sort((x, y) => x.date.localeCompare(y.date)))
+      }
+      if (filter === 'bySearch') {
+        search = (search.toUpperCase());
+        console.log(search);
+        setSearchBudget(listBudgets.filter(presu => presu.budgetName.includes(search,0)))
+      }
+  
+      
+       setAction(()=> action + 1)
+  }
+
+
   return (
     <div className="container App">
       <div className="row">
@@ -252,7 +282,7 @@ export default function Budgets() {
         </div>
         <div className="container-list-presu col-12 col-lg-6">
           <div className="container-list text-danger sticky-top p-3 mt-5 mh-100">
-            <PanelBudgetsList listBudgets={listBudgets} actionDelete={onDeleteBudget} actionModify={onModifyBudget} />
+            <PanelBudgetsList searchBudgets={searchBudget} onFilter={onFilter} actionDelete={onDeleteBudget} actionModify={onModifyBudget} />
           </div>
         </div>
       </div>

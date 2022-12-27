@@ -1,45 +1,20 @@
 import { useState, useEffect } from "react";
 import BudgetItem from "./BudgetItem";
 
-const PanelBudgetsList = ({ listBudgets, actionDelete, actionModify }) => {
-  
-  const [action, setAction] = useState(0);
-  
+const PanelBudgetsList = ({ searchBudgets, onFilter, actionDelete, actionModify }) => {
+
+  //const [action, setAction] = useState(0);
   // const [searchBudget, setSearchBudget] = useState([]);
-  //   useEffect(() => {
-  //  }, [searchBudget])
+
+    /*  useEffect(() => {
+      setSearchBudget([...listBudgets])
+     // console.log('HE PASSAAT PEL USEEFFECTY')
+    }, [listBudgets]) */
   
   
 
   
-  function onFilter(filter, search) {
-    
-    if (filter === 'byName') {
-      listBudgets.sort((x, y) => x.budgetName.localeCompare(y.budgetName))
-    }
-    if (filter === 'byDate') {
-      listBudgets.sort((x, y) => x.date.localeCompare(y.date))
-    }
-    if (filter === 'byTotal') {
-      listBudgets.sort((x, y) => (y.total)-(x.total))
-    }
-    if (filter === 'byDefault') {
-      listBudgets.sort((x, y) => x.date.localeCompare(y.date))
-    }
-    if (filter === 'bySearch') {
-      search = (search.toUpperCase());
-      console.log(search);
-      //listBudgets.filter(presu => presu.budgetName.includes(search,0))
-      const searchBudget = listBudgets.filter(presu => presu.budgetName.includes(search,0))
-      listBudgets = searchBudget
-      console.log(searchBudget);
-      console.log(listBudgets)
-      //console.log(listBudgets.filter(presu => presu.budgetName.includes(search,0)))
-    }
-
-    //setSearchBudget(search)
-    setAction(()=> action + 1)
-  }
+  
 
   
   const handleSearchBudget = (value) => {
@@ -85,13 +60,13 @@ const PanelBudgetsList = ({ listBudgets, actionDelete, actionModify }) => {
           ></input>
         </div><br />
 
-        <p>NUM. DE PRESSUPOSTOS: {listBudgets.length}</p>
+        <p>NUM. DE PRESSUPOSTOS: {searchBudgets.length}</p>
         <div className="container-budgets">
-        {listBudgets.length === 0 ? (
+        {searchBudgets.length === 0 ? (
           <h1>NO EXISTEIX CAP PRESSUPOST</h1>
         ) : (
           
-          listBudgets.map((presu, index) => {
+          searchBudgets.map((presu, index) => {
             return (
               <>
                 <BudgetItem
