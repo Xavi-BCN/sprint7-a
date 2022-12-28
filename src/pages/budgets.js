@@ -5,6 +5,7 @@ import PanelBudgetsList from "../components/PanelBudgetsList";
 let date;
 let suma = 0;
 let budgetModyfying = -1;
+let id;
 
 export default function Budgets() {
   const [web, setWeb] = useState(false);
@@ -18,7 +19,6 @@ export default function Budgets() {
   const [dateBudget, setDateBudget] = useState("");
   const [listBudgets, setListBudgets] = useState( JSON.parse(localStorage.getItem("Presupuesto")) ?? []);
   const [action, setAction] = useState(0);
-  
   const [searchBudget, setSearchBudget] = useState([])
 
   useEffect(() => {
@@ -38,9 +38,7 @@ export default function Budgets() {
   }
 
   const calculateBudget = () => {
-    let priceWeb,
-      priceSeo,
-      priceAds, result = 0;
+    let priceWeb, priceSeo, priceAds = 0;
     web ? (priceWeb = 500 + pages * lang * 30) : (priceWeb = 0);
     seo ? (priceSeo = 300) : (priceSeo = 0);
     ads ? (priceAds = 200) : (priceAds = 0);
@@ -82,8 +80,6 @@ export default function Budgets() {
     }
   };
 
- 
-
   useEffect(() => {
     setTotal(calculateBudget());
   }, [web, seo, ads, pages, lang ]);
@@ -92,7 +88,6 @@ export default function Budgets() {
       localStorage.setItem("Presupuesto", JSON.stringify(listBudgets));
     }
   , [listBudgets]);
-
 
   const initForm = () => {
     setWeb(false);
@@ -114,18 +109,14 @@ export default function Budgets() {
         listBudgets.splice(budgetModyfying, 1);
         budgetModyfying = -1
       }
-
       getNow();    
-       
-      setListBudgets([{ budgetName, date, costumerName, web, pages, lang, seo, ads, total },...listBudgets])
+      id = Math.random().toString(30).substring(2);
+      setListBudgets([{ id,budgetName, date, costumerName, web, pages, lang, seo, ads, total },...listBudgets])
       initForm();  
       }
   };
 
-  
-
   const deleteData = () => {
-    console.log("borrado de local storage");
     localStorage.removeItem("Presupuesto");
     setListBudgets([]);
     window.location.reload(true);
@@ -133,8 +124,8 @@ export default function Budgets() {
 
   const onDeleteBudget = (value) => {
     budgetModyfying = -1  
-    const tempArray = listBudgets.filter((item, index)=> {
-      if(index !== value){
+    const tempArray = listBudgets.filter(item=> {
+      if(item.id !== value){
         return item
       }else{
         return null
@@ -156,12 +147,10 @@ export default function Budgets() {
     budgetModyfying = value;
   }
 
-  
   const onFilter = (filter, search) => {
     
       if (filter === 'byName') {
         setSearchBudget(listBudgets.sort((x, y) => x.budgetName.localeCompare(y.budgetName)))
-        console.log(listBudgets)
       }
       if (filter === 'byDate') {
         setSearchBudget(listBudgets.sort((x, y) => x.date.localeCompare(y.date)))
@@ -174,14 +163,10 @@ export default function Budgets() {
       }
       if (filter === 'bySearch') {
         search = (search.toUpperCase());
-        console.log(search);
         setSearchBudget(listBudgets.filter(presu => presu.budgetName.includes(search,0)))
       }
-  
-      
        setAction(()=> action + 1)
   }
-
 
   return (
     <div className="container App">
@@ -274,7 +259,7 @@ export default function Budgets() {
             className="btn btn-danger ms-1 mt-2"
             onClick={deleteData}
           >
-            Eliminar TOTS
+            "ATENCIO: Això Eliminarà TOTS els Pressupostos" 
           </button>
           <br />
           <br />

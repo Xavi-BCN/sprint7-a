@@ -3,30 +3,6 @@ import BudgetItem from "./BudgetItem";
 
 const PanelBudgetsList = ({ searchBudgets, onFilter, actionDelete, actionModify }) => {
 
-  //const [action, setAction] = useState(0);
-  // const [searchBudget, setSearchBudget] = useState([]);
-
-    /*  useEffect(() => {
-      setSearchBudget([...listBudgets])
-     // console.log('HE PASSAAT PEL USEEFFECTY')
-    }, [listBudgets]) */
-  
-  
-
-  
-  
-
-  
-  const handleSearchBudget = (value) => {
-    //let searchBudget = (value.toUpperCase())
-    //console.log(searchBudget)
-    //listBudgets.map(presu => presu.budgetName.includes(searchBudget))
-    //listBudgets.filter(presu => presu.budgetName === searchBudget);
-    //console.log(searchBudget)
-    //setAction(()=> action + 1)
-    //setSearchBudget(value.toUpperCase())
-  }
-  
 
   return (
     <>

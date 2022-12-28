@@ -2,7 +2,7 @@
 function BudgetItem({ presu, i , actionDelete, actionModify}) {
  
   return (
-    <div className="container-item" key={i} id={i}>
+    <div className="container-item" key={presu.id} id={i}>
       <div className="card text-info mt-0 w-100 shadow p-3 mb-3 bg-light.bg-gradient rounded" style={{ width: "1rem" }}>
         <div className="card-body">
           
@@ -19,7 +19,7 @@ function BudgetItem({ presu, i , actionDelete, actionModify}) {
           </div>
           <div className="card-footer"><br /><br />
             <button onClick={() => actionModify(i)} name="btn-modify" type="button" className="btn btn-outline-warning ms-1">Modificar</button>
-            <button  onClick={() => actionDelete(i)} name="btn-delete" type="button" className="btn btn-outline-danger ms-2">Eliminar</button>
+            <button  onClick={() => actionDelete(presu.id)} name="btn-delete" type="button" className="btn btn-outline-danger ms-2">Eliminar</button>
             
           </div>
         </div>
